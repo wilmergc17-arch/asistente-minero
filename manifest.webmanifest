@@ -1,0 +1,30 @@
+{
+ "name": "Asistente Minero",
+ "short_name": "Asist. Minero",
+ "lang": "es-PE",
+ "description": "Asistente de minería subterránea peruana con SSOMA, glosario, procesos, logística, CAPEX y OPEX. Funciona sin conexión.",
+ "start_url": "./",
+ "scope": "./",
+ "display": "standalone",
+ "orientation": "portrait",
+ "background_color": "#1d2a2c",
+ "theme_color": "#1d2a2c",
+ "icons": [
+  {
+   "src": "icon-192.png",
+   "sizes": "192x192",
+   "type": "image/png"
+  },
+  {
+   "src": "icon-512.png",
+   "sizes": "512x512",
+   "type": "image/png"
+  },
+  {
+   "src": "icon-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "maskable"
+  }
+ ]
+}

@@ -1,0 +1,2070 @@
+{
+ "version": "0.2.0",
+ "idioma": "es",
+ "actualizado": "2026-10-12",
+ "aviso": "Contenido de referencia general reunido de fuentes públicas, con terminología peruana. Los rangos de costo y los valores normativos son referenciales; verifica siempre el texto vigente del D.S. 024-2016-EM y sus modificatorias, y los estándares de tu unidad, antes de decidir.",
+ "fuentes": {
+  "ANM": {
+   "titulo": "Glosario Técnico Minero, Agencia Nacional de Minería (Colombia)",
+   "url": "https://www.anm.gov.co/sites/default/files/DocumentosAnm/glosariominero.pdf"
+  },
+  "D2191": {
+   "titulo": "Decreto 2191 de 2003, Glosario Técnico Minero (Colombia)",
+   "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=9198"
+  },
+  "JORC": {
+   "titulo": "Código JORC 2012 (reporte de recursos y reservas)",
+   "url": "https://www.jorc.org/docs/JORC_code_2012.pdf"
+  },
+  "MF": {
+   "titulo": "Estudio sobre factor de acoplamiento pala-camión, Journal of Mining and Environment",
+   "url": "https://jme.shahroodut.ac.ir/article_3606.html"
+  },
+  "WITS": {
+   "titulo": "Métodos de simulación del ciclo pala-camión en minería superficial, Univ. Witwatersrand",
+   "url": "https://wiredspace.wits.ac.za/items/2a04ef59-6d36-4163-92b1-591204285d0b"
+  },
+  "ENERGIMINAS": {
+   "titulo": "Proceso de minado en Cerro Corona (Gold Fields), Energiminas 2023",
+   "url": "https://energiminas.com/2023/08/11/gold-fields-ejecuta-proceso-de-minado-eficiente-en-cerro-corona-con-7-equipos-de-carguio-y-45-volquetes/"
+  },
+  "TSE": {
+   "titulo": "Costos de chancado y molienda, Thunder Said Energy",
+   "url": "https://thundersaidenergy.com/downloads/mining-crushing-grinding-and-communition-costs/"
+  },
+  "MTTODD": {
+   "titulo": "Mt Todd Benchmarking Study (Vista Gold, 2019), ejemplo de estudio de costos",
+   "url": "https://vistagold.com/images/pdf/technical_reports/2019/Mt_Todd_Benchmarking_Study_-_Rev_3.2_Public.pdf"
+  },
+  "SME": {
+   "titulo": "SME Mining Engineering Handbook, 3ª ed. (libro de referencia, conocimiento técnico general)",
+   "url": null
+  },
+  "DS024": {
+   "titulo": "D.S. 024-2016-EM, Reglamento de Seguridad y Salud Ocupacional en Minería (modificado por D.S. 023-2017-EM)",
+   "url": "https://faolex.fao.org/docs/pdf/per160277.pdf"
+  },
+  "DS023": {
+   "titulo": "D.S. 023-2017-EM, modifica artículos y anexos del D.S. 024-2016-EM (SNI)",
+   "url": "https://sni.org.pe/modifican-diversos-articulos-y-anexos-del-reglamento-de-seguridad-y-salud-ocupacional-en-mineria-aprobado-por-decreto-supremo-no-024-2016-em/"
+  },
+  "LEY29783": {
+   "titulo": "Ley 29783, Ley de Seguridad y Salud en el Trabajo (El Peruano)",
+   "url": "https://diariooficial.elperuano.pe/Normas/obtenerDocumento?idNorma=38"
+  },
+  "DS005": {
+   "titulo": "D.S. 005-2012-TR, Reglamento de la Ley 29783 (LP Derecho, texto actualizado)",
+   "url": "https://lpderecho.pe/reglamento-ley-seguridad-salud-trabajo-ley-decreto-supremo-005-2012-tr-actualizado/"
+  },
+  "CMH": {
+   "titulo": "Consorcio Minero Horizonte, página institucional",
+   "url": "https://cmh.com.pe/consorcio-minero-horizonte/"
+  },
+  "CMH_PLANTA": {
+   "titulo": "Evaluación técnica de ampliación de planta Parcoy de 1500 a 2000 TMD, CMH (ALICIA-CONCYTEC)",
+   "url": "https://alicia.concytec.gob.pe/vufind/Record/RUMP_7deacedbd18ba08041d97df6a651d653"
+  },
+  "CMH_COSTOS": {
+   "titulo": "Estructura de costos unitarios en la actividad minera, CMH Unidad Parcoy (tesis UNI, ALICIA-CONCYTEC)",
+   "url": "https://alicia.concytec.gob.pe/vufind/Record/UUNI_33f52bd4670c4846b43200cb94a6dafe"
+  },
+  "CMH_PROD": {
+   "titulo": "Ampliación de la producción en la Unidad Minera Parcoy de CMH (tesis UNSAAC)",
+   "url": "https://repositorio.unsaac.edu.pe/handle/20.500.12918/5475"
+  },
+  "GF_SSO": {
+   "titulo": "Programa de capacitación en SSO, Gold Fields La Cima (ejemplo de documento SSOMA en Perú)",
+   "url": "https://www.goldfields.com.pe/wp-content/uploads/2022/06/SSYMA-D03.19-Programa-de-Capacitacion-en-SSO_V3.doc.pdf"
+  },
+  "PE_USO": {
+   "titulo": "Uso común en minería peruana (terminología de campo)",
+   "url": null
+  }
+ },
+ "glosario": [
+  {
+   "termino": "Mena",
+   "definicion": "Mineral o roca que contiene un elemento de valor en concentración suficiente para ser extraído con beneficio económico.",
+   "categoria": "geologia",
+   "sinonimos": [
+    "mineral económico"
+   ],
+   "fuente": "ANM"
+  },
+  {
+   "termino": "Ganga",
+   "definicion": "Minerales sin valor económico que acompañan a la mena y se separan en el procesamiento.",
+   "categoria": "geologia",
+   "sinonimos": [],
+   "fuente": "ANM"
+  },
+  {
+   "termino": "Desmonte",
+   "definicion": "Material estéril sin valor económico que se extrae para acceder al mineral y se envía a botaderos.",
+   "categoria": "geologia",
+   "sinonimos": [
+    "estéril",
+    "lastre",
+    "waste"
+   ],
+   "fuente": "ANM"
+  },
+  {
+   "termino": "Ley",
+   "definicion": "Concentración del elemento de valor en el mineral, expresada en % (cobre), g/t (oro, plata) u otras unidades.",
+   "categoria": "geologia",
+   "sinonimos": [
+    "grade"
+   ],
+   "fuente": "ANM"
+  },
+  {
+   "termino": "Ley de corte",
+   "definicion": "Ley mínima a la que un bloque de mineral paga su extracción y procesamiento. Por debajo se trata como desmonte o mineral marginal.",
+   "categoria": "geologia",
+   "sinonimos": [
+    "cut-off grade"
+   ],
+   "fuente": "SME"
+  },
+  {
+   "termino": "Recurso mineral",
+   "definicion": "Concentración de material de interés económico con perspectivas razonables de extracción. Se clasifica en inferido, indicado y medido según el nivel de confianza geológica.",
+   "categoria": "geologia",
+   "sinonimos": [],
+   "fuente": "JORC"
+  },
+  {
+   "termino": "Reserva mineral",
+   "definicion": "Parte económicamente extraíble de un recurso medido o indicado, tras aplicar factores modificantes (mineros, metalúrgicos, económicos, legales, ambientales). Se clasifica en probable y probada.",
+   "categoria": "geologia",
+   "sinonimos": [],
+   "fuente": "JORC"
+  },
+  {
+   "termino": "Factores modificantes",
+   "definicion": "Consideraciones mineras, metalúrgicas, económicas, de mercado, legales, ambientales, sociales y gubernamentales usadas para convertir recursos en reservas.",
+   "categoria": "geologia",
+   "sinonimos": [],
+   "fuente": "JORC"
+  },
+  {
+   "termino": "Modelo de bloques",
+   "definicion": "Representación 3D del yacimiento dividida en bloques, cada uno con ley, densidad, tipo de roca y otros atributos estimados.",
+   "categoria": "planeamiento",
+   "sinonimos": [],
+   "fuente": "SME"
+  },
+  {
+   "termino": "Dilución",
+   "definicion": "Material estéril o de baja ley que se mezcla con el mineral durante la extracción y baja la ley enviada a planta.",
+   "categoria": "planeamiento",
+   "sinonimos": [],
+   "fuente": "SME"
+  },
+  {
+   "termino": "Recuperación minera",
+   "definicion": "Porcentaje del mineral planificado que realmente se extrae y llega a planta.",
+   "categoria": "planeamiento",
+   "sinonimos": [],
+   "fuente": "SME"
+  },
+  {
+   "termino": "Densidad aparente",
+   "definicion": "Masa por unidad de volumen de la roca in situ (t/m³). Sirve para convertir volúmenes en toneladas.",
+   "categoria": "geologia",
+   "sinonimos": [],
+   "fuente": "SME"
+  },
+  {
+   "termino": "Esponjamiento",
+   "definicion": "Aumento de volumen de la roca al ser fragmentada. El factor de esponjamiento suele estar entre 1,2 y 1,6.",
+   "categoria": "operaciones",
+   "sinonimos": [
+    "swell factor"
+   ],
+   "fuente": "SME"
+  },
+  {
+   "termino": "Veta",
+   "definicion": "Cuerpo mineralizado tabular, relleno de una fractura en la roca.",
+   "categoria": "geologia",
+   "sinonimos": [
+    "filón"
+   ],
+   "fuente": "ANM"
+  },
+  {
+   "termino": "Yacimiento",
+   "definicion": "Concentración natural de minerales que puede ser explotada económicamente.",
+   "categoria": "geologia",
+   "sinonimos": [
+    "depósito"
+   ],
+   "fuente": "ANM"
+  },
+  {
+   "termino": "Tajo abierto",
+   "definicion": "Método de explotación superficial en el que se extrae el mineral desde la superficie formando un hoyo escalonado.",
+   "categoria": "planeamiento",
+   "sinonimos": [
+    "open pit",
+    "rajo abierto"
+   ],
+   "fuente": "ANM"
+  },
+  {
+   "termino": "Banco",
+   "definicion": "Escalón horizontal del tajo, definido por su altura (típicamente 10 a 15 m en minería grande) y su ancho.",
+   "categoria": "planeamiento",
+   "sinonimos": [],
+   "fuente": "SME"
+  },
+  {
+   "termino": "Berma",
+   "definicion": "Plataforma horizontal que se deja entre bancos para contener caída de rocas y dar estabilidad.",
+   "categoria": "planeamiento",
+   "sinonimos": [],
+   "fuente": "SME"
+  },
+  {
+   "termino": "Talud",
+   "definicion": "Pared inclinada del tajo. Se habla de ángulo de cara de banco, ángulo interrampa y ángulo global.",
+   "categoria": "planeamiento",
+   "sinonimos": [],
+   "fuente": "SME"
+  },
+  {
+   "termino": "Relación de desbroce",
+   "definicion": "Toneladas de desmonte que deben moverse por cada tonelada de mineral. Indicador clave de costo en tajo abierto.",
+   "categoria": "planeamiento",
+   "sinonimos": [
+    "stripping ratio",
+    "relación estéril/mineral"
+   ],
+   "fuente": "SME"
+  },
+  {
+   "termino": "Pit final",
+   "definicion": "Límite económico último del tajo, calculado con algoritmos como Lerchs-Grossmann o pseudoflow.",
+   "categoria": "planeamiento",
+   "sinonimos": [],
+   "fuente": "SME"
+  },
+  {
+   "termino": "Fase",
+   "definicion": "Subdivisión del tajo que se explota secuencialmente para adelantar el mineral y diferir el desbroce.",
+   "categoria": "planeamiento",
+   "sinonimos": [
+    "pushback"
+   ],
+   "fuente": "SME"
+  },
+  {
+   "termino": "Rampa",
+   "definicion": "Vía inclinada que conecta bancos y permite el tránsito de equipos. Pendientes típicas de 8% a 10%.",
+   "categoria": "planeamiento",
+   "sinonimos": [],
+   "fuente": "SME"
+  },
+  {
+   "termino": "Plan de minado",
+   "definicion": "Programa de extracción que define qué, cuánto y cuándo se mina, por periodo (vida de mina, anual, mensual, semanal).",
+   "categoria": "planeamiento",
+   "sinonimos": [],
+   "fuente": "SME"
+  },
+  {
+   "termino": "Subterránea",
+   "definicion": "Explotación mediante labores bajo la superficie (galerías, rampas, piques, tajeos).",
+   "categoria": "planeamiento",
+   "sinonimos": [
+    "socavón"
+   ],
+   "fuente": "ANM"
+  },
+  {
+   "termino": "Sublevel stoping",
+   "definicion": "Método subterráneo de tajeo por subniveles con perforación larga y voladura en tajeos abiertos.",
+   "categoria": "planeamiento",
+   "sinonimos": [
+    "tajeo por subniveles"
+   ],
+   "fuente": "SME"
+  },
+  {
+   "termino": "Corte y relleno",
+   "definicion": "Método subterráneo donde se extrae el mineral en franjas horizontales y se rellena el vacío para dar soporte.",
+   "categoria": "planeamiento",
+   "sinonimos": [
+    "cut and fill"
+   ],
+   "fuente": "SME"
+  },
+  {
+   "termino": "Block caving",
+   "definicion": "Método subterráneo masivo en el que se socava la base del cuerpo y el mineral se hunde por gravedad.",
+   "categoria": "planeamiento",
+   "sinonimos": [
+    "hundimiento por bloques"
+   ],
+   "fuente": "SME"
+  },
+  {
+   "termino": "Pique",
+   "definicion": "Excavación vertical que conecta superficie con los niveles subterráneos para transporte de personal, mineral o ventilación.",
+   "categoria": "planeamiento",
+   "sinonimos": [
+    "shaft"
+   ],
+   "fuente": "ANM"
+  },
+  {
+   "termino": "Galería",
+   "definicion": "Excavación horizontal subterránea de acceso o transporte.",
+   "categoria": "planeamiento",
+   "sinonimos": [],
+   "fuente": "ANM"
+  },
+  {
+   "termino": "Chimenea",
+   "definicion": "Excavación vertical o inclinada entre niveles, usada para ventilación, traspaso de mineral o acceso.",
+   "categoria": "planeamiento",
+   "sinonimos": [
+    "raise"
+   ],
+   "fuente": "ANM"
+  },
+  {
+   "termino": "Perforación",
+   "definicion": "Operación que abre taladros en la roca para alojar explosivos.",
+   "categoria": "operaciones",
+   "sinonimos": [],
+   "fuente": "ANM"
+  },
+  {
+   "termino": "Voladura",
+   "definicion": "Fragmentación de la roca con explosivos. En Perú se llama voladura; en Chile, tronadura.",
+   "categoria": "operaciones",
+   "sinonimos": [
+    "disparo",
+    "tronadura (Chile)"
+   ],
+   "fuente": "PE_USO"
+  },
+  {
+   "termino": "Malla de perforación",
+   "definicion": "Disposición geométrica de los taladros, definida por burden y espaciamiento.",
+   "categoria": "operaciones",
+   "sinonimos": [],
+   "fuente": "SME"
+  },
+  {
+   "termino": "Burden",
+   "definicion": "Distancia entre una fila de taladros y la cara libre o la fila siguiente.",
+   "categoria": "operaciones",
+   "sinonimos": [
+    "piedra"
+   ],
+   "fuente": "SME"
+  },
+  {
+   "termino": "Espaciamiento",
+   "definicion": "Distancia entre taladros de una misma fila.",
+   "categoria": "operaciones",
+   "sinonimos": [],
+   "fuente": "SME"
+  },
+  {
+   "termino": "Sobreperforación",
+   "definicion": "Longitud que se perfora por debajo del nivel del piso del banco para evitar repiés.",
+   "categoria": "operaciones",
+   "sinonimos": [
+    "subdrill"
+   ],
+   "fuente": "SME"
+  },
+  {
+   "termino": "Factor de carga",
+   "definicion": "Cantidad de explosivo por volumen o peso de roca volada (kg/m³ o kg/t).",
+   "categoria": "operaciones",
+   "sinonimos": [
+    "powder factor"
+   ],
+   "fuente": "SME"
+  },
+  {
+   "termino": "ANFO",
+   "definicion": "Explosivo compuesto de nitrato de amonio (aprox. 94%) y petróleo diésel (aprox. 6%). No resiste agua.",
+   "categoria": "operaciones",
+   "sinonimos": [],
+   "fuente": "SME"
+  },
+  {
+   "termino": "Emulsión",
+   "definicion": "Explosivo resistente al agua formado por una solución oxidante en una fase de combustible.",
+   "categoria": "operaciones",
+   "sinonimos": [],
+   "fuente": "SME"
+  },
+  {
+   "termino": "Fragmentación",
+   "definicion": "Distribución de tamaños de la roca después de la voladura. Influye en el carguío, acarreo y chancado.",
+   "categoria": "operaciones",
+   "sinonimos": [],
+   "fuente": "SME"
+  },
+  {
+   "termino": "Carguío",
+   "definicion": "Operación de cargar el material volado a los camiones con palas, excavadoras o cargadores frontales.",
+   "categoria": "operaciones",
+   "sinonimos": [],
+   "fuente": "ANM"
+  },
+  {
+   "termino": "Acarreo",
+   "definicion": "Transporte del mineral o desmonte. En subterránea suele hacerse con scoop hasta el echadero y luego con locomotora, volquete o dumper hasta superficie.",
+   "categoria": "operaciones",
+   "sinonimos": [
+    "transporte",
+    "limpieza y acarreo",
+    "haulage"
+   ],
+   "fuente": "PE_USO"
+  },
+  {
+   "termino": "Cancha de desmonte",
+   "definicion": "Depósito del material estéril. En tajo abierto también se le llama botadero.",
+   "categoria": "operaciones",
+   "sinonimos": [
+    "botadero",
+    "depósito de desmonte",
+    "escombrera"
+   ],
+   "fuente": "PE_USO"
+  },
+  {
+   "termino": "Cancha de mineral",
+   "definicion": "Pila de mineral roto almacenado en superficie o cerca de la bocamina, para regular la alimentación a planta.",
+   "categoria": "operaciones",
+   "sinonimos": [
+    "stockpile",
+    "acopio"
+   ],
+   "fuente": "PE_USO"
+  },
+  {
+   "termino": "Sostenimiento",
+   "definicion": "Elementos que estabilizan labores subterráneas: puntales, cuadros de madera, cribbing, pernos split set y helicoidales, malla electrosoldada, shotcrete y cimbras. Se define según la tabla geomecánica (GSI/RMR) de cada labor.",
+   "categoria": "operaciones",
+   "sinonimos": [
+    "fortificación (Chile)"
+   ],
+   "fuente": "PE_USO"
+  },
+  {
+   "termino": "Desatado de rocas",
+   "definicion": "Retiro de rocas sueltas del techo (corona) y hastiales con barretilla, después de la voladura y antes de cualquier otra tarea. Es la primera línea de defensa contra la caída de rocas.",
+   "categoria": "operaciones",
+   "sinonimos": [
+    "desate",
+    "acuñadura (Chile)",
+    "scaling"
+   ],
+   "fuente": "PE_USO"
+  },
+  {
+   "termino": "Disponibilidad mecánica",
+   "definicion": "Porcentaje del tiempo total en que el equipo está apto para operar (no en mantenimiento ni reparación).",
+   "categoria": "operaciones",
+   "sinonimos": [],
+   "fuente": "SME"
+  },
+  {
+   "termino": "Utilización",
+   "definicion": "Porcentaje del tiempo disponible en que el equipo efectivamente opera.",
+   "categoria": "operaciones",
+   "sinonimos": [],
+   "fuente": "SME"
+  },
+  {
+   "termino": "OEE",
+   "definicion": "Eficiencia global del equipo: disponibilidad × utilización (o rendimiento) × calidad.",
+   "categoria": "operaciones",
+   "sinonimos": [],
+   "fuente": "SME"
+  },
+  {
+   "termino": "Despacho",
+   "definicion": "Sistema que asigna camiones a palas y destinos en tiempo real para maximizar producción.",
+   "categoria": "operaciones",
+   "sinonimos": [
+    "dispatch"
+   ],
+   "fuente": "WITS"
+  },
+  {
+   "termino": "Chancado",
+   "definicion": "Reducción de tamaño de la roca en chancadoras primaria, secundaria y terciaria.",
+   "categoria": "procesamiento",
+   "sinonimos": [
+    "trituración"
+   ],
+   "fuente": "ANM"
+  },
+  {
+   "termino": "Molienda",
+   "definicion": "Reducción fina de tamaño en molinos (SAG, bolas, barras) para liberar el mineral.",
+   "categoria": "procesamiento",
+   "sinonimos": [],
+   "fuente": "ANM"
+  },
+  {
+   "termino": "Flotación",
+   "definicion": "Proceso que separa minerales aprovechando diferencias de afinidad con burbujas de aire, con reactivos.",
+   "categoria": "procesamiento",
+   "sinonimos": [],
+   "fuente": "ANM"
+  },
+  {
+   "termino": "Lixiviación",
+   "definicion": "Disolución del metal de interés con una solución química (por ejemplo cianuro para oro, ácido sulfúrico para cobre).",
+   "categoria": "procesamiento",
+   "sinonimos": [],
+   "fuente": "ANM"
+  },
+  {
+   "termino": "Concentrado",
+   "definicion": "Producto de la planta con alta ley del metal, listo para fundición o venta.",
+   "categoria": "procesamiento",
+   "sinonimos": [],
+   "fuente": "ANM"
+  },
+  {
+   "termino": "Relave",
+   "definicion": "Residuo sólido-líquido que queda tras el procesamiento, depositado en presas o depósitos de relaves.",
+   "categoria": "procesamiento",
+   "sinonimos": [
+    "cola",
+    "tailings"
+   ],
+   "fuente": "ANM"
+  },
+  {
+   "termino": "Recuperación metalúrgica",
+   "definicion": "Porcentaje del metal contenido en el mineral alimentado que pasa al producto final.",
+   "categoria": "procesamiento",
+   "sinonimos": [],
+   "fuente": "SME"
+  },
+  {
+   "termino": "Work index",
+   "definicion": "Índice de Bond que mide la energía requerida para moler un mineral (kWh/t).",
+   "categoria": "procesamiento",
+   "sinonimos": [
+    "índice de trabajo"
+   ],
+   "fuente": "SME"
+  },
+  {
+   "termino": "CAPEX",
+   "definicion": "Gastos de capital: inversión en activos de larga vida (equipos, planta, infraestructura, desarrollo de mina).",
+   "categoria": "economia",
+   "sinonimos": [
+    "capital expenditure",
+    "inversión"
+   ],
+   "fuente": "SME"
+  },
+  {
+   "termino": "OPEX",
+   "definicion": "Gastos operativos recurrentes: mano de obra, combustible, explosivos, energía, repuestos, contratistas.",
+   "categoria": "economia",
+   "sinonimos": [
+    "operating expenditure",
+    "costo operativo"
+   ],
+   "fuente": "SME"
+  },
+  {
+   "termino": "Capital de sostenimiento",
+   "definicion": "CAPEX que se invierte durante la operación para mantener la capacidad (reemplazo de flota, recrecimiento de relaves).",
+   "categoria": "economia",
+   "sinonimos": [
+    "sustaining capex"
+   ],
+   "fuente": "SME"
+  },
+  {
+   "termino": "VAN",
+   "definicion": "Valor actual neto: suma de flujos de caja futuros descontados a una tasa, menos la inversión.",
+   "categoria": "economia",
+   "sinonimos": [
+    "NPV",
+    "valor presente neto"
+   ],
+   "fuente": "SME"
+  },
+  {
+   "termino": "TIR",
+   "definicion": "Tasa interna de retorno: tasa de descuento con la que el VAN es cero.",
+   "categoria": "economia",
+   "sinonimos": [
+    "IRR"
+   ],
+   "fuente": "SME"
+  },
+  {
+   "termino": "Payback",
+   "definicion": "Tiempo necesario para recuperar la inversión con los flujos de caja.",
+   "categoria": "economia",
+   "sinonimos": [
+    "periodo de recuperación"
+   ],
+   "fuente": "SME"
+  },
+  {
+   "termino": "Costo C1",
+   "definicion": "Costo de caja directo por unidad de metal: mina, planta, G&A del sitio, transporte y refinación, menos créditos de subproductos.",
+   "categoria": "economia",
+   "sinonimos": [
+    "cash cost"
+   ],
+   "fuente": "SME"
+  },
+  {
+   "termino": "AISC",
+   "definicion": "All-in sustaining cost: costo C1 más capital de sostenimiento, regalías, G&A corporativo y otros costos para mantener la producción.",
+   "categoria": "economia",
+   "sinonimos": [],
+   "fuente": "SME"
+  },
+  {
+   "termino": "Valor de mineral (NSR)",
+   "definicion": "Ingreso neto por tonelada de mineral después de descontar recuperación, fundición, refinación y transporte.",
+   "categoria": "economia",
+   "sinonimos": [
+    "net smelter return"
+   ],
+   "fuente": "SME"
+  },
+  {
+   "termino": "Regalía",
+   "definicion": "Pago al Estado o a un tercero, normalmente un porcentaje de ingresos o utilidades.",
+   "categoria": "economia",
+   "sinonimos": [],
+   "fuente": "ANM"
+  },
+  {
+   "termino": "Cierre de mina",
+   "definicion": "Conjunto de actividades para rehabilitar el área al final de la vida de la mina; tiene provisión de costos propia.",
+   "categoria": "economia",
+   "sinonimos": [],
+   "fuente": "ANM"
+  },
+  {
+   "termino": "Cadena de suministro minera",
+   "definicion": "Flujo de insumos (combustible, explosivos, repuestos, reactivos) hacia la mina y de productos (concentrado, cátodos) hacia puerto o cliente.",
+   "categoria": "logistica",
+   "sinonimos": [],
+   "fuente": "SME"
+  },
+  {
+   "termino": "Factor de acoplamiento",
+   "definicion": "Relación entre la capacidad de la flota de camiones y la de los equipos de carguío. Un valor cercano a 1 indica flota equilibrada.",
+   "categoria": "logistica",
+   "sinonimos": [
+    "match factor"
+   ],
+   "fuente": "MF"
+  },
+  {
+   "termino": "Tiempo de ciclo",
+   "definicion": "Tiempo que tarda un camión en completar un viaje: cola + carga + acarreo cargado + descarga + retorno vacío + esperas.",
+   "categoria": "logistica",
+   "sinonimos": [],
+   "fuente": "WITS"
+  },
+  {
+   "termino": "Stock de seguridad",
+   "definicion": "Inventario adicional para cubrir variaciones de demanda o retrasos de entrega.",
+   "categoria": "logistica",
+   "sinonimos": [],
+   "fuente": "ANM"
+  },
+  {
+   "termino": "Punto de reorden",
+   "definicion": "Nivel de inventario en el que debe emitirse un nuevo pedido: demanda diaria × tiempo de entrega + stock de seguridad.",
+   "categoria": "logistica",
+   "sinonimos": [],
+   "fuente": "ANM"
+  },
+  {
+   "termino": "Clasificación ABC",
+   "definicion": "Clasificación de inventario por valor de consumo: A (alto valor, pocos ítems), B (intermedio), C (bajo valor, muchos ítems).",
+   "categoria": "logistica",
+   "sinonimos": [],
+   "fuente": "ANM"
+  },
+  {
+   "termino": "Repuesto crítico",
+   "definicion": "Componente cuya falta detiene un equipo clave y cuyo tiempo de entrega es largo. Se mantiene en stock aunque rote poco.",
+   "categoria": "logistica",
+   "sinonimos": [],
+   "fuente": "ANM"
+  },
+  {
+   "termino": "Polvorín",
+   "definicion": "Almacén autorizado para explosivos, con controles de seguridad y registro.",
+   "categoria": "logistica",
+   "sinonimos": [],
+   "fuente": "ANM"
+  },
+  {
+   "termino": "Incoterms",
+   "definicion": "Reglas internacionales que definen responsabilidades de comprador y vendedor en el transporte (FOB, CIF, DAP, etc.). Se usan en la venta de concentrados.",
+   "categoria": "logistica",
+   "sinonimos": [],
+   "fuente": "ANM"
+  },
+  {
+   "termino": "IPERC",
+   "definicion": "Identificación de Peligros, Evaluación de Riesgos y Medidas de Control. Tiene dos formas: IPERC de línea base (lo elabora la empresa por proceso y se actualiza al menos una vez al año o cuando cambian las condiciones) e IPERC continuo (lo llena el trabajador en campo al inicio de cada tarea o guardia).",
+   "categoria": "seguridad",
+   "sinonimos": [],
+   "fuente": "DS024"
+  },
+  {
+   "termino": "PETS",
+   "definicion": "Procedimiento Escrito de Trabajo Seguro: describe paso a paso cómo realizar una tarea de forma segura.",
+   "categoria": "seguridad",
+   "sinonimos": [],
+   "fuente": "DS024"
+  },
+  {
+   "termino": "Bloqueo y etiquetado",
+   "definicion": "Procedimiento que aísla y bloquea con candado y tarjeta las fuentes de energía de un equipo antes de intervenirlo. Es trabajo de alto riesgo.",
+   "categoria": "seguridad",
+   "sinonimos": [
+    "LOTO"
+   ],
+   "fuente": "ANM"
+  },
+  {
+   "termino": "Gases de voladura",
+   "definicion": "Gases tóxicos (CO, NOx) generados por la voladura. Requieren ventilación y tiempo de espera antes de ingresar.",
+   "categoria": "seguridad",
+   "sinonimos": [],
+   "fuente": "SME"
+  },
+  {
+   "termino": "Labor",
+   "definicion": "Cualquier excavación minera: galería, crucero, subnivel, chimenea, tajo o rampa.",
+   "categoria": "planeamiento",
+   "sinonimos": [],
+   "fuente": "PE_USO"
+  },
+  {
+   "termino": "Frente",
+   "definicion": "Extremo de avance de una labor donde se perfora y dispara.",
+   "categoria": "operaciones",
+   "sinonimos": [],
+   "fuente": "PE_USO"
+  },
+  {
+   "termino": "Tajo",
+   "definicion": "Labor de explotación donde se extrae el mineral en subterránea.",
+   "categoria": "planeamiento",
+   "sinonimos": [
+    "tajeo",
+    "stope"
+   ],
+   "fuente": "PE_USO"
+  },
+  {
+   "termino": "Crucero",
+   "definicion": "Labor horizontal que corta transversalmente a la veta para llegar a ella.",
+   "categoria": "planeamiento",
+   "sinonimos": [],
+   "fuente": "PE_USO"
+  },
+  {
+   "termino": "Subnivel",
+   "definicion": "Galería auxiliar entre dos niveles principales, usada para preparar tajos.",
+   "categoria": "planeamiento",
+   "sinonimos": [],
+   "fuente": "PE_USO"
+  },
+  {
+   "termino": "Echadero",
+   "definicion": "Chimenea por donde se deja caer el mineral o desmonte por gravedad hacia un nivel inferior.",
+   "categoria": "operaciones",
+   "sinonimos": [
+    "ore pass",
+    "chute"
+   ],
+   "fuente": "PE_USO"
+  },
+  {
+   "termino": "Tolva",
+   "definicion": "Estructura al pie del echadero que almacena el mineral y permite cargar carros o volquetes.",
+   "categoria": "operaciones",
+   "sinonimos": [
+    "buzón"
+   ],
+   "fuente": "PE_USO"
+  },
+  {
+   "termino": "Bocamina",
+   "definicion": "Entrada de la mina subterránea desde superficie.",
+   "categoria": "planeamiento",
+   "sinonimos": [],
+   "fuente": "PE_USO"
+  },
+  {
+   "termino": "Estocada",
+   "definicion": "Pequeña labor lateral para alojar equipos, refugios o materiales, o para dar paso a vehículos.",
+   "categoria": "planeamiento",
+   "sinonimos": [
+    "cámara"
+   ],
+   "fuente": "PE_USO"
+  },
+  {
+   "termino": "Ventana",
+   "definicion": "Labor de acceso desde una rampa o galería hacia el cuerpo mineral o un tajo.",
+   "categoria": "planeamiento",
+   "sinonimos": [],
+   "fuente": "PE_USO"
+  },
+  {
+   "termino": "Corte y relleno ascendente",
+   "definicion": "Método en el que el tajo se explota en rebanadas horizontales de abajo hacia arriba, y cada rebanada se rellena para servir de piso a la siguiente. Muy usado en vetas angostas del Perú, como en Pataz.",
+   "categoria": "planeamiento",
+   "sinonimos": [
+    "cut and fill",
+    "OCF"
+   ],
+   "fuente": "CMH_PLANTA"
+  },
+  {
+   "termino": "Relleno detrítico",
+   "definicion": "Relleno con desmonte de la mina, colocado con scoop o por gravedad.",
+   "categoria": "operaciones",
+   "sinonimos": [],
+   "fuente": "PE_USO"
+  },
+  {
+   "termino": "Relleno hidráulico",
+   "definicion": "Relave clasificado transportado con agua por tuberías hasta el tajo. Puede llevar cemento (relleno cementado).",
+   "categoria": "operaciones",
+   "sinonimos": [],
+   "fuente": "PE_USO"
+  },
+  {
+   "termino": "Relleno en pasta",
+   "definicion": "Relave espesado con cemento que se bombea al tajo con poca agua.",
+   "categoria": "operaciones",
+   "sinonimos": [],
+   "fuente": "PE_USO"
+  },
+  {
+   "termino": "Scoop",
+   "definicion": "Cargador de bajo perfil para limpiar el mineral de los tajos y frentes.",
+   "categoria": "operaciones",
+   "sinonimos": [
+    "scooptram",
+    "LHD"
+   ],
+   "fuente": "PE_USO"
+  },
+  {
+   "termino": "Jumbo",
+   "definicion": "Equipo de perforación mecanizada con uno o más brazos para frentes y sostenimiento.",
+   "categoria": "operaciones",
+   "sinonimos": [],
+   "fuente": "PE_USO"
+  },
+  {
+   "termino": "Jackleg",
+   "definicion": "Perforadora neumática manual con barra de avance, usada en minería convencional.",
+   "categoria": "operaciones",
+   "sinonimos": [
+    "perforadora neumática"
+   ],
+   "fuente": "PE_USO"
+  },
+  {
+   "termino": "Winche",
+   "definicion": "Equipo de arrastre con cable y rastrillo para limpiar mineral en tajos angostos.",
+   "categoria": "operaciones",
+   "sinonimos": [
+    "winche de rastrillo"
+   ],
+   "fuente": "PE_USO"
+  },
+  {
+   "termino": "Volquete",
+   "definicion": "Camión de acarreo. En subterránea se usan volquetes convencionales o dumpers de bajo perfil.",
+   "categoria": "operaciones",
+   "sinonimos": [],
+   "fuente": "PE_USO"
+  },
+  {
+   "termino": "Locomotora",
+   "definicion": "Equipo sobre rieles que arrastra carros mineros por las galerías.",
+   "categoria": "operaciones",
+   "sinonimos": [],
+   "fuente": "PE_USO"
+  },
+  {
+   "termino": "Guardia",
+   "definicion": "Turno de trabajo. Se habla de guardia día y guardia noche.",
+   "categoria": "operaciones",
+   "sinonimos": [],
+   "fuente": "PE_USO"
+  },
+  {
+   "termino": "Jefe de guardia",
+   "definicion": "Supervisor responsable de la operación y la seguridad durante la guardia.",
+   "categoria": "seguridad",
+   "sinonimos": [],
+   "fuente": "PE_USO"
+  },
+  {
+   "termino": "Cachorreo",
+   "definicion": "Voladura secundaria para reducir bancos (rocas grandes) que no pasan la parrilla o el echadero.",
+   "categoria": "operaciones",
+   "sinonimos": [
+    "voladura secundaria",
+    "plasteo"
+   ],
+   "fuente": "PE_USO"
+  },
+  {
+   "termino": "Desquinche",
+   "definicion": "Ampliación de la sección de una labor ya abierta.",
+   "categoria": "operaciones",
+   "sinonimos": [],
+   "fuente": "PE_USO"
+  },
+  {
+   "termino": "Tiro cortado",
+   "definicion": "Taladro cargado que no detonó. Es una condición de alto riesgo que se trata según procedimiento y nunca se reperfora.",
+   "categoria": "seguridad",
+   "sinonimos": [
+    "tiro fallado",
+    "tiro soplado"
+   ],
+   "fuente": "PE_USO"
+  },
+  {
+   "termino": "Gaseado",
+   "definicion": "Persona afectada por exposición a gases por encima de los límites permisibles (CO, NO2, falta de oxígeno).",
+   "categoria": "seguridad",
+   "sinonimos": [],
+   "fuente": "DS024"
+  },
+  {
+   "termino": "Puntal de seguridad",
+   "definicion": "Madera redonda colocada entre piso y techo como sostenimiento temporal o de avance.",
+   "categoria": "seguridad",
+   "sinonimos": [],
+   "fuente": "PE_USO"
+  },
+  {
+   "termino": "Cuadro de madera",
+   "definicion": "Sostenimiento con postes y sombrero de madera en labores de roca mala.",
+   "categoria": "operaciones",
+   "sinonimos": [],
+   "fuente": "PE_USO"
+  },
+  {
+   "termino": "Split set",
+   "definicion": "Perno de fricción ranurado que se instala a presión en el taladro.",
+   "categoria": "operaciones",
+   "sinonimos": [],
+   "fuente": "PE_USO"
+  },
+  {
+   "termino": "Perno helicoidal",
+   "definicion": "Barra corrugada anclada con resina o cemento para sostenimiento permanente.",
+   "categoria": "operaciones",
+   "sinonimos": [],
+   "fuente": "PE_USO"
+  },
+  {
+   "termino": "Shotcrete",
+   "definicion": "Concreto lanzado sobre la roca para sostenerla.",
+   "categoria": "operaciones",
+   "sinonimos": [
+    "concreto lanzado"
+   ],
+   "fuente": "PE_USO"
+  },
+  {
+   "termino": "GSI",
+   "definicion": "Índice geológico de resistencia. En Perú se usa la tabla GSI modificada para definir el sostenimiento en cada labor.",
+   "categoria": "seguridad",
+   "sinonimos": [],
+   "fuente": "DS024"
+  },
+  {
+   "termino": "TMS",
+   "definicion": "Tonelada métrica seca: tonelada de mineral descontando la humedad.",
+   "categoria": "economia",
+   "sinonimos": [],
+   "fuente": "PE_USO"
+  },
+  {
+   "termino": "TMH",
+   "definicion": "Tonelada métrica húmeda: tonelada de mineral con su humedad.",
+   "categoria": "economia",
+   "sinonimos": [],
+   "fuente": "PE_USO"
+  },
+  {
+   "termino": "TMD",
+   "definicion": "Toneladas métricas por día. Unidad común de capacidad de planta en Perú.",
+   "categoria": "economia",
+   "sinonimos": [],
+   "fuente": "PE_USO"
+  },
+  {
+   "termino": "Merrill-Crowe",
+   "definicion": "Proceso que precipita el oro de la solución cianurada con polvo de zinc.",
+   "categoria": "procesamiento",
+   "sinonimos": [],
+   "fuente": "CMH_PLANTA"
+  },
+  {
+   "termino": "Contrata",
+   "definicion": "Empresa contratista minera que ejecuta labores de avance, explotación o servicios para el titular.",
+   "categoria": "economia",
+   "sinonimos": [
+    "empresa contratista minera",
+    "ECM"
+   ],
+   "fuente": "PE_USO"
+  },
+  {
+   "termino": "Precio unitario",
+   "definicion": "Costo por metro de avance o por tonelada que se paga a la contrata. Incluye mano de obra, materiales, explosivos, EPP, herramientas, equipos, gastos generales y utilidad.",
+   "categoria": "economia",
+   "sinonimos": [],
+   "fuente": "CMH_COSTOS"
+  },
+  {
+   "termino": "SSOMA",
+   "definicion": "Seguridad, Salud Ocupacional y Medio Ambiente. Área y sistema de gestión que integra la prevención de accidentes, la salud de los trabajadores y el cuidado ambiental.",
+   "categoria": "seguridad",
+   "sinonimos": [
+    "SSO",
+    "HSE",
+    "SSYMA"
+   ],
+   "fuente": "DS024"
+  },
+  {
+   "termino": "PETAR",
+   "definicion": "Permiso Escrito para Trabajo de Alto Riesgo. Lo firman en cada guardia el supervisor y el jefe de área antes de iniciar el trabajo (Anexo 18 del D.S. 024-2016-EM).",
+   "categoria": "seguridad",
+   "sinonimos": [],
+   "fuente": "DS024"
+  },
+  {
+   "termino": "ATS",
+   "definicion": "Análisis de Trabajo Seguro. Herramienta para identificar los riesgos de una tarea y sus controles antes de ejecutarla (Anexo 11).",
+   "categoria": "seguridad",
+   "sinonimos": [],
+   "fuente": "DS024"
+  },
+  {
+   "termino": "Trabajo de alto riesgo",
+   "definicion": "Tarea con alto potencial de daño grave o muerte, como trabajos en altura, en caliente, en espacios confinados, con energía eléctrica, excavaciones o izaje. Requiere PETAR.",
+   "categoria": "seguridad",
+   "sinonimos": [],
+   "fuente": "DS024"
+  },
+  {
+   "termino": "Comité de SSO",
+   "definicion": "Órgano paritario (empresa y trabajadores) que vigila la gestión de seguridad. Obligatorio con 20 o más trabajadores; con menos, se designa un supervisor de SSO.",
+   "categoria": "seguridad",
+   "sinonimos": [],
+   "fuente": "DS024"
+  },
+  {
+   "termino": "Inducción",
+   "definicion": "Capacitación inicial al trabajador antes de asignarle su puesto, sobre políticas, reglas y riesgos (Anexo 4).",
+   "categoria": "seguridad",
+   "sinonimos": [],
+   "fuente": "DS024"
+  },
+  {
+   "termino": "Acto subestándar",
+   "definicion": "Acción del trabajador que no cumple el procedimiento o estándar y puede causar un incidente.",
+   "categoria": "seguridad",
+   "sinonimos": [],
+   "fuente": "DS024"
+  },
+  {
+   "termino": "Condición subestándar",
+   "definicion": "Situación del entorno de trabajo que no cumple el estándar y puede causar un incidente.",
+   "categoria": "seguridad",
+   "sinonimos": [],
+   "fuente": "DS024"
+  },
+  {
+   "termino": "Incidente peligroso",
+   "definicion": "Suceso que pudo causar lesiones graves o muerte. Se notifica a la autoridad (Anexo 21).",
+   "categoria": "seguridad",
+   "sinonimos": [],
+   "fuente": "DS024"
+  },
+  {
+   "termino": "Accidente incapacitante",
+   "definicion": "Accidente que, tras la evaluación médica, impide al trabajador volver a su labor al día siguiente.",
+   "categoria": "seguridad",
+   "sinonimos": [],
+   "fuente": "DS024"
+  },
+  {
+   "termino": "Estándar",
+   "definicion": "Documento que fija los parámetros y requisitos mínimos aceptables para una tarea o equipo (Anexo 9).",
+   "categoria": "seguridad",
+   "sinonimos": [],
+   "fuente": "DS024"
+  },
+  {
+   "termino": "Refugio minero",
+   "definicion": "Cámara subterránea equipada con aire, agua y comunicación para que el personal se proteja durante una emergencia (Anexo 19).",
+   "categoria": "seguridad",
+   "sinonimos": [
+    "estación de refugio"
+   ],
+   "fuente": "DS024"
+  },
+  {
+   "termino": "Autorrescatador",
+   "definicion": "Equipo personal que entrega aire respirable o filtra CO por un tiempo limitado durante una emergencia.",
+   "categoria": "seguridad",
+   "sinonimos": [],
+   "fuente": "DS024"
+  },
+  {
+   "termino": "EMO",
+   "definicion": "Examen médico ocupacional: de ingreso, periódico y de retiro.",
+   "categoria": "seguridad",
+   "sinonimos": [],
+   "fuente": "DS024"
+  },
+  {
+   "termino": "EPP",
+   "definicion": "Equipo de protección personal: casco, lámpara, respirador, lentes, protector auditivo, guantes, botas, ropa con cinta reflectiva, arnés, autorrescatador.",
+   "categoria": "seguridad",
+   "sinonimos": [],
+   "fuente": "DS024"
+  },
+  {
+   "termino": "Check list pre-uso",
+   "definicion": "Inspección del equipo que el operador hace al inicio de cada guardia antes de operarlo.",
+   "categoria": "seguridad",
+   "sinonimos": [],
+   "fuente": "PE_USO"
+  },
+  {
+   "termino": "OSINERGMIN",
+   "definicion": "Organismo que fiscaliza la seguridad de la infraestructura en la mediana y gran minería.",
+   "categoria": "seguridad",
+   "sinonimos": [],
+   "fuente": "PE_USO"
+  },
+  {
+   "termino": "SUNAFIL",
+   "definicion": "Superintendencia Nacional de Fiscalización Laboral. Fiscaliza el cumplimiento de la normativa de seguridad y salud en el trabajo.",
+   "categoria": "seguridad",
+   "sinonimos": [],
+   "fuente": "PE_USO"
+  },
+  {
+   "termino": "OEFA",
+   "definicion": "Organismo de Evaluación y Fiscalización Ambiental. Supervisa el cumplimiento de compromisos ambientales.",
+   "categoria": "medio_ambiente",
+   "sinonimos": [],
+   "fuente": "PE_USO"
+  },
+  {
+   "termino": "IGA",
+   "definicion": "Instrumento de Gestión Ambiental (por ejemplo EIA, EIA-sd, DIA). Aprueba y fija los compromisos ambientales de la operación.",
+   "categoria": "medio_ambiente",
+   "sinonimos": [],
+   "fuente": "PE_USO"
+  },
+  {
+   "termino": "Plan de cierre de minas",
+   "definicion": "Plan que define las actividades y la garantía financiera para rehabilitar el área al final de la operación (Ley 28090).",
+   "categoria": "medio_ambiente",
+   "sinonimos": [],
+   "fuente": "PE_USO"
+  },
+  {
+   "termino": "Drenaje ácido de roca",
+   "definicion": "Agua ácida con metales que se genera cuando los sulfuros se oxidan al contacto con aire y agua.",
+   "categoria": "medio_ambiente",
+   "sinonimos": [],
+   "fuente": "SME"
+  },
+  {
+   "termino": "Degradación de cianuro",
+   "definicion": "Tratamiento de soluciones y relaves para destruir el cianuro antes de reutilizar el agua o disponer los relaves.",
+   "categoria": "medio_ambiente",
+   "sinonimos": [],
+   "fuente": "CMH_PLANTA"
+  }
+ ],
+ "procesos": [
+  {
+   "id": "ciclo-subterraneo",
+   "titulo": "Ciclo de minado subterráneo (corte y relleno)",
+   "resumen": "Ciclo típico de un tajo en una mina aurífera de vetas en el Perú, como las de Pataz.",
+   "pasos": [
+    "Inicio de guardia: charla de 5 minutos, IPERC continuo y PETAR si aplica.",
+    "Ventilación y verificación de gases.",
+    "Desatado de rocas.",
+    "Sostenimiento según tabla GSI.",
+    "Perforación con jackleg o jumbo.",
+    "Carguío de explosivos y disparo en horario fijo, con vigías.",
+    "Ventilación y espera de gases.",
+    "Limpieza con scoop o winche hacia el echadero.",
+    "Acarreo a superficie con locomotora o volquete.",
+    "Relleno del tajo (detrítico, hidráulico o en pasta) para la siguiente rebanada."
+   ],
+   "indicadores": [
+    "Avance por disparo (m)",
+    "TMS por guardia",
+    "Ley diluida",
+    "Costo US$/TMS",
+    "Índice de frecuencia"
+   ],
+   "consejos": [
+    "Controlar el ancho de minado reduce la dilución, que en vetas angostas decide la rentabilidad.",
+    "Ninguna tarea empieza sin desatado y sin IPERC continuo."
+   ],
+   "fuentes": [
+    "CMH_PLANTA",
+    "DS024",
+    "PE_USO"
+   ]
+  },
+  {
+   "id": "ciclo-minado",
+   "titulo": "Ciclo de minado en tajo abierto",
+   "resumen": "Secuencia básica de operaciones unitarias que se repite en cada banco.",
+   "pasos": [
+    "Perforación de taladros según malla diseñada.",
+    "Carga de explosivos y voladura.",
+    "Carguío del material fragmentado con palas, excavadoras o cargadores.",
+    "Acarreo con camiones a chancadora, stockpile o botadero.",
+    "Servicios auxiliares: mantenimiento de vías, drenaje, limpieza con tractores y motoniveladoras."
+   ],
+   "indicadores": [
+    "Toneladas por día movidas",
+    "Costo por tonelada en cada operación",
+    "Fragmentación P80",
+    "Productividad de pala (t/h)"
+   ],
+   "consejos": [
+    "Una mejor fragmentación baja el costo de carguío, acarreo y chancado aunque suba el costo de voladura (concepto mine-to-mill).",
+    "Mantener las vías en buen estado reduce el tiempo de ciclo y el desgaste de neumáticos."
+   ],
+   "fuentes": [
+    "ENERGIMINAS",
+    "SME"
+   ]
+  },
+  {
+   "id": "perforacion-voladura",
+   "titulo": "Perforación y voladura",
+   "resumen": "Diseño y ejecución de la fragmentación de roca.",
+   "pasos": [
+    "Definir altura de banco, diámetro de taladro, burden y espaciamiento.",
+    "Marcar la malla en el terreno con topografía.",
+    "Perforar y verificar profundidad de cada taladro.",
+    "Cargar explosivo (ANFO en seco, emulsión con agua) y colocar retacado.",
+    "Conectar la secuencia de iniciación y evacuar el área.",
+    "Disparar, ventilar y revisar tiros fallados."
+   ],
+   "indicadores": [
+    "Factor de carga (kg/t)",
+    "Metros perforados por turno",
+    "Costo por tonelada volada",
+    "Fragmentación"
+   ],
+   "consejos": [
+    "El burden suele estar entre 25 y 40 veces el diámetro del taladro como primera aproximación.",
+    "Registrar cada voladura para correlacionar diseño con resultados."
+   ],
+   "fuentes": [
+    "SME"
+   ]
+  },
+  {
+   "id": "carguio-acarreo",
+   "titulo": "Carguío y acarreo",
+   "resumen": "Mover el material volado al destino correcto con la flota más eficiente.",
+   "pasos": [
+    "Asignar palas a frentes según plan de minado.",
+    "Dimensionar flota de camiones con el factor de acoplamiento.",
+    "Usar un sistema de despacho para asignar camiones en tiempo real.",
+    "Controlar destinos: mineral a chancadora o stockpile, desmonte a botadero."
+   ],
+   "indicadores": [
+    "Tiempo de ciclo",
+    "Factor de acoplamiento",
+    "Colas en pala",
+    "Rendimiento t/h por camión",
+    "Costo $/t-km"
+   ],
+   "consejos": [
+    "El acarreo suele ser la partida más grande del costo mina en tajo abierto.",
+    "Colas largas en pala indican exceso de camiones; palas esperando indican déficit."
+   ],
+   "fuentes": [
+    "MF",
+    "WITS",
+    "SME"
+   ]
+  },
+  {
+   "id": "procesamiento",
+   "titulo": "Procesamiento de minerales",
+   "resumen": "Transformar el mineral en un producto vendible.",
+   "pasos": [
+    "Chancado primario, secundario y terciario.",
+    "Molienda (SAG y bolas) hasta el tamaño de liberación.",
+    "Concentración: flotación para sulfuros, lixiviación para óxidos y oro.",
+    "Espesamiento y filtrado del concentrado.",
+    "Disposición de relaves."
+   ],
+   "indicadores": [
+    "Toneladas tratadas por hora",
+    "Recuperación metalúrgica",
+    "Ley de concentrado",
+    "kWh/t",
+    "Consumo de reactivos"
+   ],
+   "consejos": [
+    "La molienda suele ser el mayor consumidor de energía de la planta."
+   ],
+   "fuentes": [
+    "TSE",
+    "SME"
+   ]
+  },
+  {
+   "id": "mantenimiento",
+   "titulo": "Mantenimiento de equipos mineros",
+   "resumen": "Mantener la disponibilidad de la flota al menor costo.",
+   "pasos": [
+    "Plan de mantenimiento preventivo por horas de operación.",
+    "Monitoreo de condición (análisis de aceite, vibraciones, termografía).",
+    "Gestión de componentes mayores (motores, transmisiones) con programa de cambio.",
+    "Registro de fallas y análisis de causa raíz."
+   ],
+   "indicadores": [
+    "Disponibilidad mecánica",
+    "MTBF (tiempo medio entre fallas)",
+    "MTTR (tiempo medio de reparación)",
+    "Costo de mantenimiento por hora"
+   ],
+   "consejos": [
+    "Una disponibilidad objetivo habitual para camiones grandes está en torno a 85% a 90%."
+   ],
+   "fuentes": [
+    "SME"
+   ]
+  },
+  {
+   "id": "seguridad-operacional",
+   "titulo": "Gestión de seguridad en operación",
+   "resumen": "Controles mínimos antes y durante cualquier tarea.",
+   "pasos": [
+    "Charla de inicio de guardia.",
+    "IPERC continuo en la labor.",
+    "Seguir el PETS de la tarea; PETAR si es trabajo de alto riesgo.",
+    "Check list pre-uso de equipos.",
+    "Bloqueo y etiquetado antes de intervenir equipos.",
+    "Reportar actos y condiciones subestándar, incidentes y casi incidentes."
+   ],
+   "indicadores": [
+    "Índice de frecuencia",
+    "Índice de severidad",
+    "Reportes de casi incidentes"
+   ],
+   "consejos": [
+    "Revisa la sección SSOMA para el detalle de cada herramienta y la normativa."
+   ],
+   "fuentes": [
+    "DS024"
+   ]
+  }
+ ],
+ "logistica": [
+  {
+   "id": "dimensionamiento-flota",
+   "titulo": "Dimensionamiento de flota de camiones",
+   "contenido": "Para saber cuántos camiones necesita una pala, se compara el tiempo de ciclo del camión con el tiempo que tarda la pala en cargarlo.",
+   "formulas": [
+    {
+     "nombre": "Tiempo de ciclo del camión",
+     "expresion": "Tc = t_cola + t_carga + t_viaje_cargado + t_descarga + t_viaje_vacio + t_maniobras"
+    },
+    {
+     "nombre": "Camiones por pala",
+     "expresion": "N = Tc / t_carga"
+    },
+    {
+     "nombre": "Factor de acoplamiento",
+     "expresion": "MF = (camiones × t_carga) / (palas × Tc)",
+     "interpretacion": "MF < 1: palas esperando camiones. MF > 1: camiones haciendo cola. Óptimo económico cerca de 1."
+    }
+   ],
+   "fuentes": [
+    "MF",
+    "WITS"
+   ]
+  },
+  {
+   "id": "inventario",
+   "titulo": "Gestión de inventario de insumos y repuestos",
+   "contenido": "El objetivo es no detener la operación por falta de insumos sin inmovilizar demasiado capital en almacén.",
+   "formulas": [
+    {
+     "nombre": "Punto de reorden",
+     "expresion": "PR = consumo_diario × tiempo_entrega_dias + stock_seguridad"
+    },
+    {
+     "nombre": "Stock de seguridad",
+     "expresion": "SS = Z × σ_consumo_diario × √tiempo_entrega_dias",
+     "interpretacion": "Z = 1,65 para 95% de nivel de servicio; 2,33 para 99%."
+    },
+    {
+     "nombre": "Lote económico (EOQ)",
+     "expresion": "EOQ = √(2 × demanda_anual × costo_pedido / costo_mantener_unidad_año)"
+    }
+   ],
+   "fuentes": [
+    "SME"
+   ]
+  },
+  {
+   "id": "combustible",
+   "titulo": "Logística de combustible",
+   "contenido": "El diésel es uno de los insumos más grandes en minería superficial. Se controla por consumo en litros por hora de cada equipo y autonomía de tanques en sitio.",
+   "formulas": [
+    {
+     "nombre": "Días de autonomía",
+     "expresion": "Autonomía = capacidad_tanques_litros / consumo_diario_litros"
+    },
+    {
+     "nombre": "Consumo de la flota",
+     "expresion": "Consumo diario = Σ (litros_por_hora_equipo × horas_operadas)"
+    }
+   ],
+   "fuentes": [
+    "SME"
+   ]
+  },
+  {
+   "id": "explosivos",
+   "titulo": "Logística de explosivos",
+   "contenido": "Los explosivos requieren polvorines autorizados, control de entradas y salidas y transporte con permisos. El consumo se planifica con el factor de carga y el tonelaje a volar.",
+   "formulas": [
+    {
+     "nombre": "Explosivo requerido",
+     "expresion": "kg_explosivo = toneladas_a_volar × factor_de_carga_kg_por_t"
+    }
+   ],
+   "fuentes": [
+    "SME"
+   ]
+  },
+  {
+   "id": "concentrado",
+   "titulo": "Transporte de concentrado a puerto",
+   "contenido": "El concentrado se transporta en camiones encapsulados, tren o mineroducto hasta el puerto. Se controla humedad (límite de humedad transportable, TML), peso y muestreo para la liquidación con el comprador.",
+   "formulas": [
+    {
+     "nombre": "Costo de transporte por tonelada",
+     "expresion": "Costo_t = (tarifa_t_km × distancia_km) + costos_portuarios_t"
+    }
+   ],
+   "fuentes": [
+    "SME"
+   ]
+  }
+ ],
+ "economia": [
+  {
+   "id": "estructura-capex",
+   "titulo": "Estructura típica del CAPEX inicial",
+   "contenido": "El capital inicial de un proyecto minero suele dividirse en: desarrollo de mina (pre-desbroce, accesos), flota minera, planta de procesamiento, infraestructura (energía, agua, campamento, caminos), depósito de relaves, costos indirectos (ingeniería, gestión de construcción, EPCM) y contingencia.",
+   "notas": [
+    "La contingencia suele estar entre 10% y 25% según el nivel del estudio.",
+    "Precisión típica: estudio de perfil ±35% a ±50%, prefactibilidad ±25%, factibilidad ±10% a ±15%."
+   ],
+   "fuentes": [
+    "SME",
+    "MTTODD"
+   ]
+  },
+  {
+   "id": "estructura-opex",
+   "titulo": "Estructura típica del OPEX",
+   "contenido": "El costo operativo se agrupa en mina (perforación, voladura, carguío, acarreo, servicios), planta (energía, reactivos, medios de molienda, revestimientos), G&A (administración, campamento, seguridad) y costos de venta (transporte, fundición, refinación).",
+   "notas": [
+    "En tajo abierto grande, el acarreo suele ser la mayor partida del costo mina.",
+    "En planta, la energía y los medios de molienda suelen ser las mayores partidas."
+   ],
+   "fuentes": [
+    "SME",
+    "TSE"
+   ]
+  },
+  {
+   "id": "rangos-referenciales",
+   "titulo": "Rangos referenciales de costo (orientativos)",
+   "contenido": "Valores aproximados para conversación inicial. Varían mucho con escala, país, precio de energía y tipo de roca. No usar para decisiones sin datos propios.",
+   "tabla": [
+    {
+     "concepto": "Costo mina tajo abierto grande",
+     "rango": "1,5 a 3,5 US$/t movida"
+    },
+    {
+     "concepto": "Costo mina subterránea",
+     "rango": "15 a 60 US$/t de mineral"
+    },
+    {
+     "concepto": "Procesamiento por flotación",
+     "rango": "5 a 15 US$/t tratada"
+    },
+    {
+     "concepto": "Lixiviación en pilas",
+     "rango": "2 a 6 US$/t tratada"
+    },
+    {
+     "concepto": "G&A",
+     "rango": "1 a 5 US$/t tratada"
+    }
+   ],
+   "fuentes": [
+    "SME"
+   ],
+   "confianza": "orientativa"
+  },
+  {
+   "id": "evaluacion-economica",
+   "titulo": "Evaluación económica de un proyecto o decisión",
+   "contenido": "Para comparar alternativas (comprar vs. alquilar equipos, ampliar planta, cambiar método) se construye el flujo de caja de cada opción y se comparan VAN, TIR y payback.",
+   "formulas": [
+    {
+     "nombre": "Valor actual neto",
+     "expresion": "VAN = Σ [FC_t / (1 + r)^t] − Inversión_0"
+    },
+    {
+     "nombre": "Flujo de caja anual",
+     "expresion": "FC = Ingresos − OPEX − Impuestos − CAPEX_sostenimiento"
+    },
+    {
+     "nombre": "Ingreso por tonelada (simplificado)",
+     "expresion": "Ingreso_t = ley × recuperación × precio − costos_venta"
+    },
+    {
+     "nombre": "Ley de corte de equilibrio",
+     "expresion": "Ley_corte = (costo_planta + G&A) / (precio − costo_venta) / recuperación"
+    }
+   ],
+   "fuentes": [
+    "SME"
+   ]
+  },
+  {
+   "id": "costo-propiedad-equipo",
+   "titulo": "Costo horario de propiedad y operación de un equipo",
+   "contenido": "Útil para comparar equipos o decidir entre flota propia y contratista.",
+   "formulas": [
+    {
+     "nombre": "Costo de propiedad por hora",
+     "expresion": "(Precio − Valor_residual) / Horas_vida_util + intereses_seguros_por_hora"
+    },
+    {
+     "nombre": "Costo de operación por hora",
+     "expresion": "combustible + lubricantes + neumáticos + mantenimiento + operador"
+    },
+    {
+     "nombre": "Costo por tonelada",
+     "expresion": "(Costo_propiedad_h + Costo_operacion_h) / Productividad_t_por_h"
+    }
+   ],
+   "fuentes": [
+    "SME"
+   ]
+  },
+  {
+   "id": "costos-unitarios-subterranea",
+   "titulo": "Estructura de costos unitarios en mina subterránea peruana",
+   "contenido": "En las minas subterráneas peruanas el costo se calcula por labor: US$/m para avances (galerías, cruceros, chimeneas, rampas) y US$/TMS para explotación de tajos. Así se paga también a las contratas.",
+   "formulas": [
+    {
+     "nombre": "Precio unitario de una labor",
+     "expresion": "PU = mano_de_obra (con leyes sociales) + materiales + explosivos + EPP + herramientas + costo_horario_equipos + gastos_generales + utilidad"
+    },
+    {
+     "nombre": "Costo de avance por metro",
+     "expresion": "US$/m = costo_por_disparo / avance_efectivo_por_disparo_m"
+    },
+    {
+     "nombre": "Costo de explotación por tonelada",
+     "expresion": "US$/TMS = costo_por_disparo / (volumen_roto_m³ × densidad × (1 − humedad))"
+    },
+    {
+     "nombre": "Ley diluida",
+     "expresion": "Ley_diluida = Ley_veta × ancho_veta / ancho_minado"
+    }
+   ],
+   "notas": [
+    "En vetas angostas, la dilución pesa mucho en el costo por onza: controlar el ancho de minado es clave.",
+    "El costo de sostenimiento y relleno puede ser una parte importante del costo de explotación en corte y relleno."
+   ],
+   "fuentes": [
+    "CMH_COSTOS",
+    "SME"
+   ]
+  }
+ ],
+ "faq": [
+  {
+   "pregunta": "¿Cuál es la diferencia entre IPERC línea base e IPERC continuo?",
+   "respuesta": "El de línea base lo hace la empresa por proceso y se actualiza al menos una vez al año. El continuo lo llena el trabajador en campo al inicio de cada tarea, con los peligros del momento.",
+   "fuentes": [
+    "DS024"
+   ]
+  },
+  {
+   "pregunta": "¿Cuándo necesito un PETAR?",
+   "respuesta": "Para todo trabajo de alto riesgo: en altura, en caliente, en espacios confinados, con energía eléctrica, excavaciones, izaje y otros que defina la empresa. Lo firman en cada guardia el supervisor y el jefe de área.",
+   "fuentes": [
+    "DS024"
+   ]
+  },
+  {
+   "pregunta": "¿Qué diferencia hay entre PETS y ATS?",
+   "respuesta": "El PETS es el procedimiento formal y aprobado de una tarea. El ATS es un análisis rápido que se hace cuando la tarea es nueva o no tiene PETS.",
+   "fuentes": [
+    "DS024"
+   ]
+  },
+  {
+   "pregunta": "¿Puedo retirarme de una labor si veo un peligro?",
+   "respuesta": "Sí. El reglamento reconoce el derecho del trabajador a retirarse de un área cuando detecta un peligro de alto riesgo, avisando de inmediato a su supervisor.",
+   "fuentes": [
+    "DS024"
+   ]
+  },
+  {
+   "pregunta": "¿Cómo se calcula el índice de frecuencia?",
+   "respuesta": "IF = número de accidentes incapacitantes y mortales × 1 000 000 / horas-hombre trabajadas.",
+   "fuentes": [
+    "DS024"
+   ]
+  },
+  {
+   "pregunta": "¿Qué hago ante un tiro cortado?",
+   "respuesta": "No te acerques ni lo reperfores. Señaliza y bloquea el acceso, avisa al supervisor y sigue el procedimiento de la unidad para eliminarlo.",
+   "fuentes": [
+    "DS024",
+    "PE_USO"
+   ]
+  },
+  {
+   "pregunta": "¿Cuándo es obligatorio el Comité de SSO?",
+   "respuesta": "Con 20 trabajadores o más. Con menos de 20 se designa un supervisor de SSO.",
+   "fuentes": [
+    "DS024"
+   ]
+  },
+  {
+   "pregunta": "¿Qué método de explotación usa Consorcio Minero Horizonte?",
+   "respuesta": "En Parcoy, corte y relleno ascendente en vetas, con planta de flotación y cianuración.",
+   "fuentes": [
+    "CMH_PLANTA"
+   ]
+  },
+  {
+   "pregunta": "¿Qué es una contrata?",
+   "respuesta": "Una empresa contratista minera que ejecuta labores para el titular de la mina y cobra por precio unitario (US$/m o US$/TMS).",
+   "fuentes": [
+    "PE_USO"
+   ]
+  },
+  {
+   "pregunta": "¿Por qué el desatado es tan importante?",
+   "respuesta": "Porque la caída de rocas ha sido históricamente una de las principales causas de accidentes mortales en la minería subterránea peruana. El desatado y el sostenimiento son los controles clave.",
+   "fuentes": [
+    "DS024",
+    "PE_USO"
+   ]
+  },
+  {
+   "pregunta": "¿Cuál es la diferencia entre recurso y reserva?",
+   "respuesta": "Un recurso tiene perspectivas razonables de extracción; una reserva es la parte del recurso medido o indicado que ya demostró ser económica tras aplicar factores mineros, metalúrgicos, económicos, legales y ambientales.",
+   "fuentes": [
+    "JORC"
+   ]
+  },
+  {
+   "pregunta": "¿Qué es la relación de desbroce y por qué importa?",
+   "respuesta": "Es cuántas toneladas de desmonte se mueven por cada tonelada de mineral. Una relación alta aumenta el costo por tonelada de mineral y puede volver no rentable una parte del yacimiento.",
+   "fuentes": [
+    "SME"
+   ]
+  },
+  {
+   "pregunta": "¿Cómo sé si me sobran o me faltan camiones?",
+   "respuesta": "Calcula el factor de acoplamiento. Cerca de 1 está equilibrado. Si las palas esperan camiones faltan camiones; si hay colas en pala sobran.",
+   "fuentes": [
+    "MF"
+   ]
+  },
+  {
+   "pregunta": "¿Qué entra en CAPEX y qué en OPEX?",
+   "respuesta": "CAPEX es inversión en activos de larga vida (flota, planta, infraestructura, pre-desbroce). OPEX es el gasto recurrente para operar (combustible, explosivos, energía, personal, repuestos).",
+   "fuentes": [
+    "SME"
+   ]
+  },
+  {
+   "pregunta": "¿Qué es el capital de sostenimiento?",
+   "respuesta": "Es CAPEX que se invierte durante la operación para mantener la capacidad, por ejemplo reemplazar camiones al final de su vida o ampliar la presa de relaves.",
+   "fuentes": [
+    "SME"
+   ]
+  },
+  {
+   "pregunta": "¿Qué diferencia hay entre costo C1 y AISC?",
+   "respuesta": "C1 es el costo de caja directo por unidad de metal. AISC suma al C1 el capital de sostenimiento, regalías y gastos corporativos para mantener la producción.",
+   "fuentes": [
+    "SME"
+   ]
+  },
+  {
+   "pregunta": "¿Por qué mejorar la voladura puede bajar el costo total?",
+   "respuesta": "Una fragmentación más fina mejora la productividad de palas, reduce el desgaste y acelera el chancado y la molienda. El ahorro aguas abajo suele superar el mayor costo de explosivo.",
+   "fuentes": [
+    "SME"
+   ]
+  },
+  {
+   "pregunta": "¿Cómo calculo el punto de reorden de un repuesto?",
+   "respuesta": "Multiplica el consumo diario por el tiempo de entrega en días y suma el stock de seguridad.",
+   "fuentes": [
+    "SME"
+   ]
+  },
+  {
+   "pregunta": "¿Qué es la ley de corte?",
+   "respuesta": "Es la ley mínima a la que un bloque paga su procesamiento. Los bloques por debajo se tratan como desmonte o se guardan como mineral marginal.",
+   "fuentes": [
+    "SME"
+   ]
+  },
+  {
+   "pregunta": "¿Qué es disponibilidad mecánica y utilización?",
+   "respuesta": "Disponibilidad es el porcentaje del tiempo en que el equipo puede operar. Utilización es el porcentaje de ese tiempo disponible en que efectivamente opera.",
+   "fuentes": [
+    "SME"
+   ]
+  },
+  {
+   "pregunta": "¿Conviene comprar o alquilar equipos?",
+   "respuesta": "Compara el costo por tonelada de ambas opciones incluyendo propiedad, operación y mantenimiento, y el VAN del flujo de caja. Alquilar reduce CAPEX pero suele subir el OPEX.",
+   "fuentes": [
+    "SME"
+   ]
+  },
+  {
+   "pregunta": "¿Qué precisión tiene un estimado de costos?",
+   "respuesta": "Perfil ±35% a ±50%, prefactibilidad alrededor de ±25%, factibilidad ±10% a ±15%.",
+   "fuentes": [
+    "SME"
+   ]
+  },
+  {
+   "pregunta": "¿Qué es el NSR?",
+   "respuesta": "Net smelter return: el ingreso neto por tonelada de mineral tras descontar recuperación, fundición, refinación y transporte. Se usa para decidir el destino de cada bloque.",
+   "fuentes": [
+    "SME"
+   ]
+  },
+  {
+   "pregunta": "¿Cuál es la diferencia entre ANFO y emulsión?",
+   "respuesta": "El ANFO es barato pero no resiste agua. La emulsión resiste agua y tiene mayor densidad, pero cuesta más.",
+   "fuentes": [
+    "SME"
+   ]
+  },
+  {
+   "pregunta": "¿Qué controla el tiempo de ciclo de un camión?",
+   "respuesta": "Las colas en pala y chancadora, la distancia y pendiente de la ruta, el estado de las vías y la velocidad de los equipos.",
+   "fuentes": [
+    "WITS"
+   ]
+  }
+ ],
+ "pais": "Perú",
+ "ssoma": [
+  {
+   "id": "marco-legal",
+   "titulo": "Marco legal de SSOMA en minería peruana",
+   "contenido": "La seguridad minera en el Perú se rige por la Ley 29783 de Seguridad y Salud en el Trabajo y su reglamento (D.S. 005-2012-TR), y de forma específica por el Reglamento de Seguridad y Salud Ocupacional en Minería (D.S. 024-2016-EM) y su modificatoria (D.S. 023-2017-EM). En lo ambiental aplican la Ley General del Ambiente (Ley 28611), los instrumentos de gestión ambiental aprobados y la Ley de Cierre de Minas (Ley 28090).",
+   "puntos": [
+    "El D.S. 024-2016-EM trae 37 anexos con formatos obligatorios: IPERC continuo (7), IPERC línea base (8), estándares (9), PETS (10), ATS (11), señales y colores (17), PETAR (18), refugios (19), notificación de accidentes e incidentes (21 a 23), entre otros.",
+    "Fiscalizan SUNAFIL (seguridad y salud laboral), OSINERGMIN (infraestructura en mediana y gran minería) y OEFA (ambiental). Verifica el reparto de competencias vigente para tu estrato."
+   ],
+   "fuentes": [
+    "DS024",
+    "DS023",
+    "LEY29783",
+    "DS005"
+   ]
+  },
+  {
+   "id": "herramientas-gestion",
+   "titulo": "Herramientas de gestión de riesgos",
+   "contenido": "Cada tarea se planifica y controla con un conjunto de documentos que se complementan.",
+   "puntos": [
+    "IPERC línea base: matriz por proceso que elabora la empresa; se actualiza al menos una vez al año o cuando cambian las condiciones.",
+    "IPERC continuo: lo llena el trabajador en el lugar de trabajo al inicio de cada tarea, identificando peligros y controles del momento.",
+    "PETS: procedimiento paso a paso de cómo hacer la tarea de forma segura. Debe existir para cada proceso.",
+    "PETAR: permiso firmado en cada guardia para trabajos de alto riesgo.",
+    "ATS: análisis rápido de la tarea cuando no hay PETS o la tarea es nueva.",
+    "Check list pre-uso de equipos y herramientas, inspecciones planeadas y reportes de actos y condiciones subestándar."
+   ],
+   "fuentes": [
+    "DS024"
+   ]
+  },
+  {
+   "id": "jerarquia-controles",
+   "titulo": "Jerarquía de controles",
+   "contenido": "Los controles se aplican en este orden de preferencia, de mayor a menor eficacia.",
+   "pasos": [
+    "Eliminación del peligro.",
+    "Sustitución por algo menos peligroso.",
+    "Controles de ingeniería (guardas, ventilación, sostenimiento).",
+    "Señalización, advertencias y controles administrativos (PETS, capacitación, rotación).",
+    "Equipo de protección personal, como última barrera."
+   ],
+   "fuentes": [
+    "DS024"
+   ],
+   "confianza": "verificar artículo vigente"
+  },
+  {
+   "id": "riesgos-criticos-subterranea",
+   "titulo": "Riesgos críticos en minería subterránea",
+   "contenido": "Los peligros que más accidentes graves causan en minería subterránea peruana, con sus controles clave.",
+   "riesgos": [
+    {
+     "riesgo": "Caída o desprendimiento de rocas",
+     "controles": [
+      "Desatado antes de iniciar cualquier tarea y durante la guardia.",
+      "Sostenimiento según tabla GSI de la labor.",
+      "Nunca trabajar bajo techo sin sostener.",
+      "Inspección geomecánica diaria."
+     ]
+    },
+    {
+     "riesgo": "Gaseamiento y falta de oxígeno",
+     "controles": [
+      "Medir oxígeno y gases antes de ingresar.",
+      "Ventilar después de cada disparo y respetar el tiempo de espera.",
+      "Clausurar labores sin ventilación.",
+      "Portar autorrescatador."
+     ]
+    },
+    {
+     "riesgo": "Equipos móviles y tránsito",
+     "controles": [
+      "Check list pre-uso.",
+      "Respetar velocidades y prioridad de paso.",
+      "Usar estocadas como refugio peatonal.",
+      "Luces y alarmas de retroceso operativas."
+     ]
+    },
+    {
+     "riesgo": "Voladura",
+     "controles": [
+      "Horarios fijos de disparo y vigías en todos los accesos.",
+      "Conteo de tiros y control de tiros cortados.",
+      "Manipulación de explosivos solo por personal autorizado.",
+      "Polvorines con control de entradas y salidas."
+     ]
+    },
+    {
+     "riesgo": "Caída a echaderos, chimeneas y piques",
+     "controles": [
+      "Parrillas y barandas en echaderos.",
+      "Arnés y línea de vida en chimeneas.",
+      "Señalización y bloqueo de accesos."
+     ]
+    },
+    {
+     "riesgo": "Energía eléctrica y mecánica",
+     "controles": [
+      "Bloqueo y etiquetado.",
+      "Personal calificado.",
+      "Inspección de cables y tableros."
+     ]
+    },
+    {
+     "riesgo": "Incendio subterráneo",
+     "controles": [
+      "Extintores en equipos y estaciones.",
+      "Plan de respuesta a emergencias y simulacros.",
+      "Refugios mineros equipados."
+     ]
+    }
+   ],
+   "fuentes": [
+    "DS024",
+    "PE_USO"
+   ]
+  },
+  {
+   "id": "desatado-rocas",
+   "titulo": "Desatado de rocas paso a paso",
+   "contenido": "Procedimiento general. Siempre sigue el PETS de tu unidad.",
+   "pasos": [
+    "Ventilar la labor y verificar condiciones de gases.",
+    "Iluminar bien el techo y los hastiales.",
+    "Usar barretilla del largo adecuado a la altura de la labor.",
+    "Desatar desde zona segura (ya desatada o sostenida), avanzando hacia el frente.",
+    "Ubicarse a un costado, nunca debajo de la roca a desatar.",
+    "Golpear y escuchar: sonido hueco indica roca suelta.",
+    "Repetir el desatado durante la guardia, sobre todo después de cada disparo.",
+    "Reportar si la roca no se puede desatar y colocar sostenimiento."
+   ],
+   "fuentes": [
+    "PE_USO",
+    "DS024"
+   ]
+  },
+  {
+   "id": "ventilacion",
+   "titulo": "Ventilación (valores de referencia)",
+   "contenido": "Valores de referencia usados en la minería peruana. Confírmalos con el texto vigente del reglamento.",
+   "puntos": [
+    "Oxígeno mínimo en el aire: 19,5%.",
+    "Caudal de aire por persona según altitud: 3 m³/min hasta 1500 msnm, 4 de 1500 a 3000, 5 de 3000 a 4000, y 6 por encima de 4000 msnm.",
+    "Equipos diésel: alrededor de 3 m³/min por cada HP de potencia efectiva.",
+    "Velocidad mínima del aire en labores: 20 m/min.",
+    "Monitorear CO, NO2, CO2 y O2 en los frentes de trabajo, sobre todo después de la voladura."
+   ],
+   "fuentes": [
+    "DS024"
+   ],
+   "confianza": "verificar artículo vigente"
+  },
+  {
+   "id": "indicadores-seguridad",
+   "titulo": "Indicadores de seguridad",
+   "contenido": "Indicadores estadísticos de seguridad usados en la minería peruana.",
+   "formulas": [
+    {
+     "nombre": "Índice de frecuencia (IF)",
+     "expresion": "IF = N° accidentes incapacitantes y mortales × 1 000 000 / horas-hombre trabajadas"
+    },
+    {
+     "nombre": "Índice de severidad (IS)",
+     "expresion": "IS = días perdidos o cargados × 1 000 000 / horas-hombre trabajadas"
+    },
+    {
+     "nombre": "Índice de accidentabilidad (IA)",
+     "expresion": "IA = IF × IS / 1000"
+    }
+   ],
+   "fuentes": [
+    "DS024"
+   ]
+  },
+  {
+   "id": "emergencias",
+   "titulo": "Respuesta a emergencias",
+   "contenido": "Cada unidad debe tener un plan de preparación y respuesta a emergencias.",
+   "puntos": [
+    "Brigada de rescate minero entrenada y equipada (Anexo 20 lista el equipo mínimo).",
+    "Refugios mineros con aire comprimido, agua, comunicación y botiquín (Anexo 19).",
+    "Simulacros periódicos de incendio, sismo, gaseamiento y derrumbe.",
+    "Notificar a la autoridad los accidentes mortales e incidentes peligrosos con los formatos del reglamento (Anexos 21 a 23)."
+   ],
+   "fuentes": [
+    "DS024"
+   ]
+  },
+  {
+   "id": "salud-ocupacional",
+   "titulo": "Salud ocupacional",
+   "contenido": "Agentes que afectan la salud del trabajador minero y cómo controlarlos.",
+   "puntos": [
+    "Polvo y sílice: riesgo de silicosis. Perforación con agua, ventilación y respirador con filtro adecuado.",
+    "Ruido: límites en Anexo 12; protector auditivo y medición periódica.",
+    "Altura: riesgo de hipoxia y mal de montaña; evaluación médica y aclimatación.",
+    "Estrés térmico: valores límite en Anexo 13.",
+    "Agentes químicos como el cianuro: límites en Anexo 15, hojas de seguridad, detectores de HCN.",
+    "Exámenes médicos ocupacionales de ingreso, periódicos y de retiro (ficha en Anexo 16)."
+   ],
+   "fuentes": [
+    "DS024"
+   ]
+  },
+  {
+   "id": "medio-ambiente",
+   "titulo": "Gestión ambiental",
+   "contenido": "Compromisos ambientales típicos de una mina aurífera subterránea con planta de cianuración.",
+   "puntos": [
+    "Cumplir los compromisos del instrumento de gestión ambiental aprobado.",
+    "Manejo de relaves: estabilidad física y química del depósito, monitoreo de filtraciones.",
+    "Cianuro: transporte, almacenamiento y uso controlado; degradación antes de reutilizar agua o disponer relaves.",
+    "Control de drenaje ácido de roca en canchas de desmonte.",
+    "Monitoreo de calidad de agua, aire y suelo según el plan aprobado.",
+    "Plan de cierre de minas con garantía financiera (Ley 28090)."
+   ],
+   "fuentes": [
+    "CMH_PLANTA",
+    "SME"
+   ]
+  }
+ ],
+ "referencias_empresa": [
+  {
+   "id": "cmh",
+   "titulo": "Consorcio Minero Horizonte (referencia)",
+   "contenido": "Empresa minera aurífera peruana fundada en 1978, que explota oro en minería subterránea en el Batolito de Pataz, región La Libertad.",
+   "puntos": [
+    "Unidades de producción: Parcoy (principal, explotación desde 1986) y Los Zambos (adquirida en 2008).",
+    "Método de explotación en Parcoy: corte y relleno ascendente en vetas.",
+    "Planta Parcoy: flotación y cianuración con recuperación por Merrill-Crowe. Un estudio evaluó ampliarla de 1500 a 2000 TMD con una inversión estimada de US$ 8,38 millones.",
+    "Certificaciones declaradas: ISO 45001 (seguridad y salud), ISO 14001 (ambiental) e ISO 9001 (calidad).",
+    "Por qué sirve de referencia: es un caso típico de mina mediana subterránea aurífera peruana, con vetas angostas, relleno, planta de cianuración y fuerte exigencia en SSOMA."
+   ],
+   "fuentes": [
+    "CMH",
+    "CMH_PLANTA",
+    "CMH_PROD",
+    "CMH_COSTOS"
+   ],
+   "confianza": "datos públicos; pueden no estar actualizados"
+  }
+ ]
+}
