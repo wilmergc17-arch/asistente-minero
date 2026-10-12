@@ -106,7 +106,19 @@ td:last-child{font-variant-numeric:tabular-nums;white-space:nowrap}
 .small{font-size:.85rem}
 .empty{padding:16px;color:var(--muted)}
 nav.bar{position:fixed;left:0;right:0;bottom:0;background:var(--surface);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px);z-index:5}
-nav.bar .in{max-width:760px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);height:var(--nav-h)}
+nav.bar .in{max-width:760px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr);height:var(--nav-h)}
+.chat{display:grid;gap:10px}
+.msg{padding:12px 14px;border-radius:var(--r);display:grid;gap:8px;min-width:0;overflow-wrap:anywhere}
+.msg.u{background:var(--rock);color:var(--on-rock);justify-self:end;max-width:88%}
+.msg.u .tag{justify-self:start}
+.msg.a{background:var(--surface);border:1px solid var(--line)}
+.msg.a code{font-family:var(--f-mono);font-size:.85em;background:var(--surface-2);padding:1px 4px;border-radius:4px}
+.msg.a h3{font-size:1.1rem}
+.ask{display:grid;gap:8px;position:sticky;bottom:calc(var(--nav-h) + env(safe-area-inset-bottom,0px));background:var(--bg);padding-block:8px}
+.ask textarea{border:1px solid var(--line);background:var(--surface);border-radius:var(--r);padding:10px 12px;width:100%;resize:vertical}
+.btn.small{padding:6px 10px;font-size:.85rem;justify-self:start}
+.btn:disabled{opacity:.5}
+details summary{cursor:pointer;color:var(--muted)}
 nav.bar button{border:0;background:none;display:grid;place-items:center;align-content:center;gap:2px;font-size:.75rem;font-weight:600;color:var(--muted);cursor:pointer}
 nav.bar button svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8}
 nav.bar button[aria-current="page"]{color:var(--ore)}
@@ -134,6 +146,7 @@ mark{background:var(--ore-soft);color:inherit;padding:0 2px;border-radius:3px}
   <div class="in">
     <button data-go="home"><svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Inicio</button>
     <button data-go="ssoma" class="s"><svg viewBox="0 0 24 24"><path d="M4 15a8 8 0 0 1 16 0"/><path d="M2 15h20v2H2z"/><path d="M12 7V4"/><path d="M9 8l-1-3M15 8l1-3"/></svg>SSOMA</button>
+    <button data-go="ia"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/></svg>IA</button>
     <button data-go="calc"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 12h2M14 12h2M8 16h2M14 16h2"/></svg>Calcular</button>
     <button data-go="docs"><svg viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 13h6M9 17h6"/></svg>Mis docs</button>
   </div>
@@ -153,7 +166,7 @@ function toast(msg){ const t = document.createElement("div"); t.className = "toa
 
 /* ---------- estado de red ---------- */
 function updNet(){ const on = navigator.onLine, n = $("#net"); n.textContent = on ? "Con conexión" : "Sin conexión"; n.className = "net " + (on ? "on" : "off"); }
-addEventListener("online", updNet); addEventListener("offline", updNet); updNet();
+addEventListener("online", () => { updNet(); if (current.v === "ia") renderIA(); }); addEventListener("offline", () => { updNet(); if (current.v === "ia") renderIA(); }); updNet();
 
 /* ---------- secciones ---------- */
 const SECTIONS = [
@@ -269,7 +282,7 @@ function go(state, push = true){
   render(); scrollTo(0, 0);
   document.querySelectorAll("nav.bar button").forEach(b => b.setAttribute("aria-current", (b.dataset.go === tabOf(state)) ? "page" : "false"));
 }
-function tabOf(s){ if (s.v === "sec" && s.sec === "ssoma") return "ssoma"; if (s.v === "item" && s.sec === "ssoma") return "ssoma"; if (s.v === "calc" || s.v === "calcitem") return "calc"; if (s.v === "docs" || s.v === "doc") return "docs"; if (s.v === "home") return "home"; return ""; }
+function tabOf(s){ if (s.v === "sec" && s.sec === "ssoma") return "ssoma"; if (s.v === "item" && s.sec === "ssoma") return "ssoma"; if (s.v === "calc" || s.v === "calcitem") return "calc"; if (s.v === "docs" || s.v === "doc") return "docs"; if (s.v === "ia") return "ia"; if (s.v === "home") return "home"; return ""; }
 addEventListener("popstate", e => { go(e.state || {v: "home"}, false); });
 document.querySelectorAll("nav.bar button").forEach(b => b.addEventListener("click", () => {
   const g = b.dataset.go; go(g === "ssoma" ? {v: "sec", sec: "ssoma"} : {v: g});
@@ -287,6 +300,7 @@ function render(){
   if (s.v === "calcitem") return renderCalc(s.id);
   if (s.v === "docs") return renderDocs();
   if (s.v === "doc") return renderDoc(s.id);
+  if (s.v === "ia") return renderIA();
 }
 
 function renderHome(){
@@ -296,6 +310,7 @@ function renderHome(){
     <div class="alert"><b>Antes de empezar la guardia</b><p>Desatado, IPERC continuo y verificación de gases. Ninguna tarea empieza sin estos tres controles.</p></div>
     <h2 class="sec">Consultar</h2>
     <div class="grid">${tiles}
+      <button class="tile" onclick="go({v:'ia'})"><span class="k">Preguntar a la IA</span><span class="n">${AI.key() ? "Conectada" : "Sin conectar"} · con internet: decisiones, fotos, normas</span></button>
       <button class="tile" onclick="go({v:'calc'})"><span class="k">Calculadoras</span><span class="n">${CALCS.length} herramientas · flota, costos, seguridad</span></button>
       <button class="tile" onclick="go({v:'docs'})"><span class="k">Mis documentos</span><span class="n">${DOCS.length} guardados en este teléfono</span></button>
     </div>
@@ -307,8 +322,9 @@ function renderHome(){
 function renderSearch(q){
   const r = search(q);
   let h = `${backBtn()}<h2 class="view">“${esc(q)}”</h2>`;
+  if (AI.ready()) h += `<button class="btn" id="askai">Preguntar a la IA con esta información</button>`;
   if (!r.length){
-    h += `<div class="card"><p>No encontré nada sobre eso en la base guardada.</p><p class="muted small">Prueba con otra palabra (por ejemplo “gases”, “scoop”, “costo por metro”). Cuando haya internet, el modo IA podrá responder preguntas abiertas.</p></div>`;
+    h += `<div class="card"><p>No encontré nada sobre eso en la base guardada.</p><p class="muted small">Prueba con otra palabra (por ejemplo “gases”, “scoop”, “costo por metro”)${AI.ready() ? "" : " o, con internet, usa la pestaña IA para preguntas abiertas"}.</p></div>`;
   } else {
     const top = r[0];
     h += `<div class="card answer"><span class="label">Mejor respuesta · ${esc(top.e.sec === "docs" ? "Mis documentos" : secBy[top.e.sec].name)}</span><h3>${esc(titleOf(top.e.item) || top.e.item.nombre)}</h3>${top.e.sec === "docs" ? `<p>${hl((top.e.item.notas || top.e.item.texto || "").slice(0, 400), q)}</p><button class="btn ghost" onclick="go({v:'doc',id:'${top.e.id}'})">Abrir documento</button>` : fichaHtml(top.e.item)}</div>`;
@@ -318,6 +334,7 @@ function renderSearch(q){
       return `<button class="row" onclick="${click}"><span class="t"><span class="tag ${cls}">${esc(label)}</span>${esc(titleOf(e.item) || e.item.nombre)}</span><span class="d">${hl(snippet(e), q)}</span></button>`; }).join("")}</div>`;
   }
   view.innerHTML = h;
+  const b = $("#askai"); if (b) b.onclick = () => { go({v: "ia"}); ask(q); };
 }
 
 let glosCat = "todas", glosFilter = "";
@@ -409,7 +426,7 @@ function renderDocs(){
   view.innerHTML = `<h2 class="view">Mis documentos</h2>
    <p class="lede">Guarda manuales, PETS, procedimientos o fotos. Quedan solo en este teléfono y el buscador los incluye.</p>
    <div class="drop">
-     <p><b>Agregar archivo o foto</b><br><span class="small muted">Texto (.txt, .md, .csv), PDF o imagen. Los PDF con texto se leen y se pueden buscar. En las fotos escribe notas o etiquetas para encontrarlas; la lectura automática de fotos llegará con el modo con internet.</span></p>
+     <p><b>Agregar archivo o foto</b><br><span class="small muted">Texto (.txt, .md, .csv), PDF o imagen. Los PDF con texto se pueden buscar al instante. Para fotos y PDF escaneados, abre el documento y usa “Leer con IA” cuando tengas internet.</span></p>
      <input id="file" type="file" accept=".txt,.md,.csv,.pdf,image/*" multiple>
    </div>
    <div class="list" id="dl"></div>`;
@@ -448,14 +465,227 @@ function renderDoc(id){
      <div class="field"><label for="dt">Título</label><input id="dt" value="${esc(d.titulo)}"></div>
      <div class="field"><label for="de">Etiquetas</label><input id="de" value="${esc(d.etiquetas)}" placeholder="Ej.: PETS, desatado, nivel 2350"></div>
      <div class="field"><label for="dn">Notas</label><textarea id="dn" rows="4" placeholder="Qué contiene, dónde aplica, qué te importa recordar">${esc(d.notas)}</textarea></div>
+     <div class="chips"><button class="btn ghost" id="readai">Leer con IA</button><button class="btn ghost" id="askdoc">Preguntar a la IA sobre esto</button></div>
+     <p class="small muted">“Leer con IA” transcribe y resume el archivo para que quede buscable sin conexión. Necesita internet.</p>
      <div class="chips"><button class="btn" id="save">Guardar cambios</button><button class="btn danger" id="del">Eliminar</button></div>
      <div id="confirm"></div>
    </div>
    ${d.texto ? `<h2 class="sec">Texto del documento</h2><div class="card"><p class="small" style="white-space:pre-wrap;max-height:420px;overflow:auto">${esc(d.texto.slice(0, 20000))}</p></div>` : ""}`;
+  $("#readai").onclick = e => readWithAI(d, e.currentTarget);
+  $("#askdoc").onclick = () => askAboutDoc(d);
   $("#save").onclick = async () => { d.titulo = $("#dt").value; d.etiquetas = $("#de").value; d.notas = $("#dn").value; await DB.put(d); await loadDocs(); buildIndex(); toast("Cambios guardados"); };
   $("#del").onclick = () => { $("#confirm").innerHTML = `<div class="alert"><b>¿Eliminar este documento?</b><p>Se borra de este teléfono y no se puede recuperar.</p><div class="chips"><button class="btn danger" id="yes">Sí, eliminar</button><button class="btn ghost" id="no">Cancelar</button></div></div>`;
     $("#yes").onclick = async () => { await DB.del(d.id); await loadDocs(); buildIndex(); toast("Documento eliminado"); go({v: "docs"}); };
     $("#no").onclick = () => { $("#confirm").innerHTML = ""; }; };
+}
+
+/* ---------- modo con internet: IA ---------- */
+const SDK_URL = "https://cdn.jsdelivr.net/npm/@anthropic-ai/sdk@0.128.0/+esm";
+const MODEL = "claude-opus-5-5";
+const SYSTEM = `Eres el Asistente Minero, un asesor experto en minería subterránea peruana (minas auríferas de vetas como las de Pataz, con referencia a Consorcio Minero Horizonte), logística minera, CAPEX y OPEX, y sobre todo en seguridad, salud ocupacional y medio ambiente (SSOMA).
+
+Cómo respondes:
+- En español, con la terminología de la minería peruana (labor, tajo, echadero, guardia, contrata, TMS, PETAR, IPERC, PETS, ATS).
+- Directo y práctico: primero la respuesta, luego el detalle. Usa listas cortas cuando ayuden. Usa unidades reales (US$/m, US$/TMS, g/t, m³/min).
+- La seguridad va primero. Si la pregunta toca una tarea con riesgo, menciona los controles críticos (desatado, sostenimiento, ventilación, PETAR, bloqueo) aunque no te los pidan. Nunca sugieras saltarse un control para ganar producción.
+- Cada turno trae fichas de la base de conocimiento de la app y documentos del usuario. Úsalos como fuente principal y di de cuál sale el dato. Si usas búsqueda web, prefiere fuentes oficiales peruanas (MINEM, OSINERGMIN, SUNAFIL, El Peruano) y cita la página.
+- Para normas, cita el dispositivo legal y recuerda verificar el texto vigente. No inventes números de artículo ni cifras: si no estás seguro, dilo.
+- Para ayudar a decidir: plantea las opciones, compáralas en costo, riesgo SSOMA, plazo y viabilidad, da una recomendación clara y di qué dato cambiaría la recomendación.
+- Si te falta un dato de la operación, asume un valor razonable, dilo explícitamente y sigue.`;
+
+const AI = {
+  key(){ try { return localStorage.getItem("ia-key") || ""; } catch(e){ return ""; } },
+  setKey(k){ try { k ? localStorage.setItem("ia-key", k) : localStorage.removeItem("ia-key"); } catch(e){} this.client = null; },
+  web(){ try { return localStorage.getItem("ia-web") !== "0"; } catch(e){ return true; } },
+  client: null,
+  async getClient(){
+    if (this.client) return this.client;
+    const mod = await import(SDK_URL);
+    const Anthropic = mod.default || mod.Anthropic;
+    this.client = new Anthropic({apiKey: this.key(), dangerouslyAllowBrowser: true, maxRetries: 2});
+    this.mod = mod;
+    return this.client;
+  },
+  ready(){ return navigator.onLine && !!this.key(); },
+};
+/* messages: historial completo que se envía a la API (solo en memoria, nunca se edita).
+   view: lo que se muestra; se guarda en el teléfono para releerlo, sin adjuntos. */
+let CHAT = {messages: [], view: [], busy: false};
+try { const s = JSON.parse(localStorage.getItem("ia-chat") || "null"); if (s && Array.isArray(s.view)) CHAT.view = s.view.map(m => ({...m, done: true, status: ""})); } catch(e){}
+function saveChat(){ try { localStorage.setItem("ia-chat", JSON.stringify({view: CHAT.view.slice(-40)})); } catch(e){} }
+
+function contextFor(q){
+  const r = search(q).slice(0, 8);
+  if (!r.length) return "";
+  return r.map(({e}) => {
+    if (e.sec === "docs"){ const d = e.item; return `<documento_usuario titulo="${d.titulo || d.nombre}">\n${(d.notas ? "Notas: " + d.notas + "\n" : "") + (d.texto || "").slice(0, 6000)}\n</documento_usuario>`; }
+    const x = e.item, f = (x.fuentes || (x.fuente ? [x.fuente] : [])).map(id => KB.fuentes[id]?.titulo || id).join("; ");
+    return `<ficha seccion="${secBy[e.sec].name}" titulo="${titleOf(x)}">\n${textOf(x)}\nFuente: ${f}\n</ficha>`;
+  }).join("\n\n");
+}
+function mdLite(s){
+  let h = esc(s);
+  h = h.replace(/^### (.*)$/gm, "<h3>$1</h3>").replace(/^## (.*)$/gm, "<h3>$1</h3>").replace(/^# (.*)$/gm, "<h3>$1</h3>");
+  h = h.replace(/\*\*(.+?)\*\*/g, "<b>$1</b>").replace(/`([^`]+)`/g, "<code>$1</code>");
+  h = h.replace(/(?:^|\n)((?:\s*[-*•] .*(?:\n|$))+)/g, (m, block) => "\n<ul class=\"pts\">" + block.trim().split(/\n/).map(l => "<li>" + l.replace(/^\s*[-*•] /, "") + "</li>").join("") + "</ul>\n");
+  h = h.replace(/(?:^|\n)((?:\s*\d+[.)] .*(?:\n|$))+)/g, (m, block) => "\n<ol class=\"steps\">" + block.trim().split(/\n/).map(l => "<li>" + l.replace(/^\s*\d+[.)] /, "") + "</li>").join("") + "</ol>\n");
+  h = h.replace(/(https?:\/\/[^\s<)]+)/g, '<a href="$1" target="_blank" rel="noopener">$1</a>');
+  return h.split(/\n{2,}/).filter(p => p.trim()).map(p => /^\s*<(ul|ol|h3)/.test(p) ? p : `<p>${p.replace(/\n/g, "<br>")}</p>`).join("");
+}
+
+function renderIA(){
+  const on = navigator.onLine, hasKey = !!AI.key();
+  let h = `<h2 class="view">Preguntar a la IA</h2>`;
+  if (!hasKey) {
+    h += `<div class="card"><h3>Conecta la IA</h3>
+      <p>La IA necesita tu clave de Claude. Se guarda solo en este teléfono y cada consulta se cobra a tu cuenta de Anthropic.</p>
+      <ol class="steps"><li>Entra a <a href="https://console.anthropic.com/settings/keys" target="_blank" rel="noopener">console.anthropic.com</a> y crea una cuenta.</li><li>Carga saldo y, si quieres, pon un límite de gasto mensual.</li><li>Crea una clave (empieza con <code>sk-ant-</code>) y pégala aquí.</li></ol>
+      <div class="field"><label for="ik">Clave de API</label><input id="ik" type="password" autocomplete="off" placeholder="sk-ant-…"></div>
+      <button class="btn" id="iks">Guardar clave</button>
+      <p class="small muted">Sin clave, el buscador sigue funcionando con la base guardada.</p></div>`;
+    view.innerHTML = h;
+    $("#iks").onclick = () => { const k = $("#ik").value.trim(); if (!/^sk-ant-/.test(k)) { toast("La clave debe empezar con sk-ant-"); return; } AI.setKey(k); toast("Clave guardada"); renderIA(); };
+    return;
+  }
+  if (!on) h += `<div class="alert"><b>Sin conexión</b><p>La IA necesita internet. Mientras tanto, usa el buscador: responde con la base guardada y tus documentos.</p></div>`;
+  h += `<div class="chips">${["Ayúdame a decidir entre dos opciones", "Analiza los riesgos de esta tarea", "¿Cómo bajo el costo por metro de avance?", "Arma un IPERC para desatado en un tajo"].map(s => `<button class="chip" data-s="${esc(s)}">${esc(s)}</button>`).join("")}</div>
+    <div id="chat" class="chat"></div>
+    <form id="askf" class="ask"><textarea id="ask" rows="3" placeholder="Escribe tu pregunta o describe la decisión que debes tomar" ${on ? "" : "disabled"}></textarea>
+      <div class="chips"><button class="btn" id="askb" type="submit" ${on ? "" : "disabled"}>Preguntar</button>
+      <label class="small"><input type="checkbox" id="iw" ${AI.web() ? "checked" : ""}> Buscar también en internet</label></div></form>
+    <details class="small"><summary>Ajustes de la IA</summary><div class="chips" style="margin-top:8px">
+      <button class="btn ghost" id="newc">Nueva conversación</button><button class="btn danger" id="delk">Quitar clave</button></div></details>`;
+  view.innerHTML = h;
+  drawChat();
+  view.querySelectorAll(".chip[data-s]").forEach(c => c.onclick = () => { $("#ask").value = c.dataset.s + ": "; $("#ask").focus(); });
+  $("#iw").onchange = e => { try { localStorage.setItem("ia-web", e.target.checked ? "1" : "0"); } catch(_){} };
+  $("#newc").onclick = () => { CHAT = {messages: [], view: [], busy: false}; saveChat(); drawChat(); };
+  $("#delk").onclick = () => { AI.setKey(""); toast("Clave eliminada de este teléfono"); renderIA(); };
+  $("#askf").onsubmit = e => { e.preventDefault(); const q = $("#ask").value.trim(); if (q && !CHAT.busy) { $("#ask").value = ""; ask(q); } };
+}
+function drawChat(){
+  const box = $("#chat"); if (!box) return;
+  box.innerHTML = CHAT.view.length ? CHAT.view.map((m, i) => m.role === "note" ? `<p class="small muted">${esc(m.text)}</p>` : m.role === "user"
+    ? `<div class="msg u">${esc(m.text)}${m.att ? `<span class="tag d">${esc(m.att)}</span>` : ""}</div>`
+    : `<div class="msg a">${m.text ? mdLite(m.text) : `<p class="muted">${esc(m.status || "Pensando…")}</p>`}
+        ${m.sources && m.sources.length ? `<p class="src">Fuentes web: ${m.sources.map(s => `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.title || s.url)}</a>`).join(" · ")}</p>` : ""}
+        ${m.done && m.text && !m.err ? `<button class="btn ghost small" data-save="${i}">Guardar en Mis docs</button>` : ""}</div>`).join("")
+    : `<p class="empty">Pregunta lo que necesites. La IA usa la base de la app, tus documentos y, si lo activas, internet.</p>`;
+  box.querySelectorAll("[data-save]").forEach(b => b.onclick = () => saveAnswer(+b.dataset.save));
+}
+async function saveAnswer(i){
+  const a = CHAT.view[i], q = CHAT.view.slice(0, i).reverse().find(m => m.role === "user");
+  const d = {id: "d" + Date.now(), nombre: "Respuesta IA", titulo: (q ? q.text : "Respuesta IA").slice(0, 90), fecha: Date.now(), tamano: 0,
+    notas: "", etiquetas: "IA aprendido", texto: a.text + (a.sources && a.sources.length ? "\n\nFuentes: " + a.sources.map(s => s.url).join(" ") : ""), tipo: "IA", blob: null};
+  try { await DB.put(d); await loadDocs(); buildIndex(); toast("Guardado. Ya lo puedes buscar sin conexión."); } catch(e){ toast("No se pudo guardar en el teléfono."); }
+}
+function errMsg(e){
+  const s = e && (e.status || (e.error && e.error.status));
+  if (s === 401) return "La clave no es válida. Revísala en Ajustes de la IA.";
+  if (s === 403) return "Tu cuenta no tiene permiso para este modelo o función.";
+  if (s === 429) return "Demasiadas consultas seguidas o límite de gasto alcanzado. Espera un momento.";
+  if (s === 400 && /credit|balance/i.test(String(e.message))) return "Tu cuenta de Anthropic no tiene saldo. Carga saldo en console.anthropic.com.";
+  if (s >= 500) return "El servicio de IA está con problemas. Intenta de nuevo en unos minutos.";
+  if (!navigator.onLine) return "Se perdió la conexión. Vuelve a intentar cuando tengas señal.";
+  return "No se pudo completar la consulta: " + (e && e.message ? e.message : "error desconocido") + ".";
+}
+async function ask(q, attach){
+  CHAT.busy = true;
+  const ctx = contextFor(q);
+  const content = [];
+  if (attach) content.push(attach.block);
+  content.push({type: "text", text: (ctx ? `Información de la app relacionada con la pregunta:\n${ctx}\n\n` : "") + `Pregunta: ${q}`});
+  const base = CHAT.messages.length;
+  if (!base && CHAT.view.length) CHAT.view.push({role: "note", text: "Nueva conversación: la IA no recuerda las respuestas anteriores a esta línea."});
+  CHAT.messages.push({role: "user", content});
+  CHAT.view.push({role: "user", text: q, att: attach ? attach.label : ""});
+  const out = {role: "assistant", text: "", status: "Pensando…", sources: [], done: false};
+  CHAT.view.push(out); drawChat(); scrollChat();
+  const btn = $("#askb"); if (btn) btn.disabled = true;
+  try {
+    const client = await AI.getClient();
+    const tools = AI.web() ? [{type: "web_search_20260209", name: "web_search", max_uses: 4, user_location: {type: "approximate", country: "PE"}}] : [];
+    for (let round = 0; round < 4; round++){
+      const stream = client.beta.messages.stream({
+        model: MODEL, max_tokens: 16000, system: SYSTEM,
+        thinking: {type: "adaptive"}, output_config: {effort: "medium"},
+        betas: ["server-side-fallback-2026-07-01"], fallbacks: "default",
+        tools, messages: CHAT.messages,
+      });
+      stream.on("text", t => { out.text += t; out.status = ""; drawChatThrottled(); });
+      stream.on("contentBlock", b => {
+        if (b.type === "server_tool_use") { out.status = "Buscando en internet…"; drawChatThrottled(); }
+        if (b.type === "web_search_tool_result" && Array.isArray(b.content)) b.content.forEach(r => { if (r.url && !out.sources.some(s => s.url === r.url)) out.sources.push({url: r.url, title: r.title}); });
+      });
+      const msg = await stream.finalMessage();
+      CHAT.messages.push({role: "assistant", content: msg.content});
+      if (msg.stop_reason === "pause_turn") continue;
+      if (msg.stop_reason === "refusal") out.text += (out.text ? "\n\n" : "") + "La IA no puede responder esta consulta. Reformúlala con más contexto operativo.";
+      if (msg.stop_reason === "max_tokens") out.text += "\n\n(La respuesta se cortó por largo. Pide que continúe.)";
+      break;
+    }
+  } catch(e){
+    out.text = errMsg(e); out.err = true;
+    CHAT.messages.length = base; // descarta el turno fallido para que el historial siga siendo válido
+  }
+  out.done = true; out.status = ""; CHAT.busy = false; saveChat(); drawChat(); scrollChat();
+  if (btn) btn.disabled = false;
+}
+let _dt = 0;
+function drawChatThrottled(){ const n = Date.now(); if (n - _dt > 120){ _dt = n; drawChat(); } }
+function scrollChat(){ const m = view.querySelector(".msg:last-child"); if (m) m.scrollIntoView({block: "nearest"}); }
+
+/* imagen → JPEG reducido en base64 (la API acepta hasta ~5 MB por imagen) */
+async function imageBlock(blob){
+  const bmp = await createImageBitmap(blob);
+  const s = Math.min(1, 1568 / Math.max(bmp.width, bmp.height));
+  const c = document.createElement("canvas"); c.width = Math.round(bmp.width * s); c.height = Math.round(bmp.height * s);
+  c.getContext("2d").drawImage(bmp, 0, 0, c.width, c.height);
+  const data = c.toDataURL("image/jpeg", 0.85).split(",")[1];
+  return {type: "image", source: {type: "base64", media_type: "image/jpeg", data}};
+}
+async function pdfBlock(blob){
+  const buf = new Uint8Array(await blob.arrayBuffer()); let bin = "";
+  for (let i = 0; i < buf.length; i += 0x8000) bin += String.fromCharCode.apply(null, buf.subarray(i, i + 0x8000));
+  return {type: "document", source: {type: "base64", media_type: "application/pdf", data: btoa(bin)}};
+}
+async function docBlock(d){
+  if (d.tipo === "Foto" && d.blob) return imageBlock(d.blob);
+  if (d.tipo === "PDF" && d.blob) { if (d.blob.size > 30 * 1024 * 1024) throw new Error("El PDF pesa más de 30 MB"); return pdfBlock(d.blob); }
+  return {type: "text", text: `<documento titulo="${d.titulo}">\n${(d.texto || "").slice(0, 150000)}\n</documento>`};
+}
+/* Leer con IA: transcribe y resume para que el documento quede buscable sin conexión */
+async function readWithAI(d, btn){
+  if (!AI.ready()) { toast(AI.key() ? "Necesitas conexión a internet." : "Primero conecta la IA en la pestaña IA."); return; }
+  btn.disabled = true; btn.textContent = "Leyendo con IA…";
+  try {
+    const client = await AI.getClient();
+    const block = await docBlock(d);
+    const msg = await client.beta.messages.stream({
+      model: MODEL, max_tokens: 16000, thinking: {type: "adaptive"}, output_config: {effort: "low"},
+      betas: ["server-side-fallback-2026-07-01"], fallbacks: "default",
+      system: "Extraes información de documentos y fotos de minería subterránea peruana. Respondes solo en el formato pedido, en español.",
+      messages: [{role: "user", content: [block, {type: "text", text:
+        "Lee este documento o foto. Devuelve exactamente tres secciones con estos encabezados:\nRESUMEN: 2 a 4 frases sobre qué es y para qué sirve, destacando cualquier riesgo o control de seguridad.\nETIQUETAS: 3 a 8 palabras clave separadas por comas, con términos de minería peruana.\nTEXTO: la transcripción fiel de todo el texto legible. Si es una foto sin texto, describe lo que se ve con detalle técnico (equipos, condiciones subestándar, señalización)."}]}],
+    }).finalMessage();
+    if (msg.stop_reason === "refusal") throw new Error("la IA no pudo procesar este archivo");
+    const t = msg.content.filter(b => b.type === "text").map(b => b.text).join("\n");
+    const part = k => { const m = t.match(new RegExp(k + ":\\s*([\\s\\S]*?)(?=\\n(?:RESUMEN|ETIQUETAS|TEXTO):|$)")); return m ? m[1].trim() : ""; };
+    const res = part("RESUMEN"), tags = part("ETIQUETAS"), txt = part("TEXTO") || t;
+    if (res) d.notas = (d.notas ? d.notas + "\n\n" : "") + "Resumen IA: " + res;
+    if (tags) d.etiquetas = [d.etiquetas, tags].filter(Boolean).join(", ");
+    if (d.tipo === "Foto" || !d.texto) d.texto = txt;
+    await DB.put(d); await loadDocs(); buildIndex(); toast("Listo. Ahora lo puedes buscar sin conexión."); renderDoc(d.id);
+  } catch(e){ toast(errMsg(e)); btn.disabled = false; btn.textContent = "Leer con IA"; }
+}
+async function askAboutDoc(d){
+  if (!AI.ready()) { toast(AI.key() ? "Necesitas conexión a internet." : "Primero conecta la IA en la pestaña IA."); return; }
+  try {
+    const block = await docBlock(d);
+    go({v: "ia"});
+    const q = `Analiza el documento adjunto "${d.titulo}". Resume lo importante, señala riesgos SSOMA o incumplimientos que veas y dime qué acciones recomiendas.`;
+    ask(q, {block, label: d.tipo + ": " + d.titulo});
+  } catch(e){ toast(errMsg(e)); }
 }
 
 /* ---------- arranque ---------- */

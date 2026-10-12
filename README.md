@@ -6,6 +6,7 @@ App para Android (PWA) de consulta minera con enfoque en minería subterránea p
 En Chrome para Android: menú ⋮ → "Instalar app" o "Agregar a pantalla principal".
 
 ## Contenido
+- **Preguntar a la IA (con internet):** chat con Claude que usa la base de la app, tus documentos y búsqueda web; ayuda a decidir; lee fotos y PDF con “Leer con IA” y guarda lo aprendido para usarlo sin conexión. Usa tu propia clave de API de Anthropic, guardada solo en el teléfono.
 - Seguridad y SSOMA (D.S. 024-2016-EM, Ley 29783), glosario peruano, procesos, logística, CAPEX/OPEX, preguntas frecuentes y empresa de referencia (Consorcio Minero Horizonte).
 - 9 calculadoras: factor de acoplamiento, punto de reorden, IF/IS/IA, caudal de aire, costo por metro, ley diluida, ley de corte, VAN y costo horario.
 - Mis documentos: PDF, textos y fotos guardados en el teléfono e incluidos en el buscador.
