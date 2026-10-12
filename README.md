@@ -20,3 +20,11 @@ python3 fuente/build_app.py fuente fuente/base_conocimiento.json . /tmp/preview.
 Al cambiar la base, sube la versión en `base_conocimiento.json` para que el teléfono descargue la actualización.
 
 Los valores normativos y de costos son referenciales: verifica siempre la norma vigente y los estándares de tu unidad.
+
+## App Android (APK)
+
+El workflow `APK Android` empaqueta la app web dentro de un WebView (carpeta `android/`) y publica
+`asistente-minero.apk` en Releases: https://github.com/wilmergc17-arch/asistente-minero/releases/latest/download/asistente-minero.apk
+
+Para firmar siempre con la misma llave (y actualizar sin desinstalar) agrega los secretos
+`ANDROID_KEYSTORE_B64` y `ANDROID_KS_PASS` en Settings > Secrets and variables > Actions.

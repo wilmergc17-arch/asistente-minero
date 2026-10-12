@@ -1,0 +1,38 @@
+plugins { id 'com.android.application' }
+
+def build = Integer.parseInt(System.getenv('VERSION_CODE') ?: '1')
+
+android {
+    namespace 'pe.asistenteminero.app'
+    compileSdk 35
+    defaultConfig {
+        applicationId 'pe.asistenteminero.app'
+        minSdk 24
+        targetSdk 34
+        versionCode build
+        versionName "1.0.${build}"
+    }
+    signingConfigs {
+        release {
+            storeFile file('../release.jks')
+            storePassword System.getenv('KS_PASS')
+            keyAlias System.getenv('KS_ALIAS')
+            keyPassword System.getenv('KS_PASS')
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            signingConfig = file('../release.jks').exists() ? signingConfigs.release : signingConfigs.debug
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+dependencies {
+    implementation 'androidx.webkit:webkit:1.12.1'
+    implementation 'androidx.core:core:1.13.1'
+}
