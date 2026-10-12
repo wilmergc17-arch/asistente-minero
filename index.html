@@ -317,7 +317,7 @@ function renderHome(){
     <div class="alert"><b>Antes de empezar la guardia</b><p>Desatado, IPERC continuo y verificación de gases. Ninguna tarea empieza sin estos tres controles.</p></div>
     <h2 class="sec">Consultar</h2>
     <div class="grid">${tiles}
-      <button class="tile" onclick="go({v:'ia'})"><span class="k">Preguntar a la IA</span><span class="n">${AI.key() ? "Conectada" : "Sin conectar"} · con internet: decisiones, fotos, normas</span></button>
+      <button class="tile" onclick="go({v:'ia'})"><span class="k">Preguntar a la IA</span><span class="n">${AI.key() ? "Clave conectada" : "Gratis con la app de Claude"} · decisiones, fotos, normas</span></button>
       <button class="tile" onclick="go({v:'calc'})"><span class="k">Calculadoras</span><span class="n">${CALCS.length} herramientas · flota, costos, seguridad</span></button>
       <button class="tile" onclick="go({v:'docs'})"><span class="k">Mis documentos</span><span class="n">${DOCS.length} guardados en este teléfono</span></button>
     </div>
@@ -329,9 +329,9 @@ function renderHome(){
 function renderSearch(q){
   const r = search(q);
   let h = `${backBtn()}<h2 class="view">“${esc(q)}”</h2>`;
-  if (AI.ready()) h += `<button class="btn" id="askai">Preguntar a la IA con esta información</button>`;
+  h += AI.ready() ? `<button class="btn" id="askai">Preguntar a la IA con esta información</button>` : `<button class="btn ghost" id="askfree">Preguntar en Claude (gratis)</button>`;
   if (!r.length){
-    h += `<div class="card"><p>No encontré nada sobre eso en la base guardada.</p><p class="muted small">Prueba con otra palabra (por ejemplo “gases”, “scoop”, “costo por metro”)${AI.ready() ? "" : " o, con internet, usa la pestaña IA para preguntas abiertas"}.</p></div>`;
+    h += `<div class="card"><p>No encontré nada sobre eso en la base guardada.</p><p class="muted small">Prueba con otra palabra (por ejemplo “gases”, “scoop”, “costo por metro”) o pregúntale a la IA con el botón de arriba.</p></div>`;
   } else {
     const top = r[0];
     h += `<div class="card answer"><span class="label">Mejor respuesta · ${esc(top.e.sec === "docs" ? "Mis documentos" : secBy[top.e.sec].name)}</span><h3>${esc(titleOf(top.e.item) || top.e.item.nombre)}</h3>${top.e.sec === "docs" ? `<p>${hl((top.e.item.notas || top.e.item.texto || "").slice(0, 400), q)}</p><button class="btn ghost" onclick="go({v:'doc',id:'${top.e.id}'})">Abrir documento</button>` : fichaHtml(top.e.item)}</div>`;
@@ -342,6 +342,7 @@ function renderSearch(q){
   }
   view.innerHTML = h;
   const b = $("#askai"); if (b) b.onclick = () => { go({v: "ia"}); ask(q); };
+  const bf = $("#askfree"); if (bf) bf.onclick = () => { sessionSet("fq", q); go({v: "ia"}); };
 }
 
 let glosCat = "todas", glosFilter = "";
@@ -433,7 +434,7 @@ function renderDocs(){
   view.innerHTML = `<h2 class="view">Mis documentos</h2>
    <p class="lede">Guarda manuales, PETS, procedimientos o fotos. Quedan solo en este teléfono y el buscador los incluye.</p>
    <div class="drop">
-     <p><b>Agregar archivo o foto</b><br><span class="small muted">Texto (.txt, .md, .csv), PDF o imagen. Los PDF con texto se pueden buscar al instante. Para fotos y PDF escaneados, abre el documento y usa “Leer con IA” cuando tengas internet.</span></p>
+     <p><b>Agregar archivo o foto</b><br><span class="small muted">Texto (.txt, .md, .csv), PDF o imagen. Los PDF con texto se pueden buscar al instante. En las fotos escribe notas o pega el texto que te dé Claude para encontrarlas luego.</span></p>
      <input id="file" type="file" accept=".txt,.md,.csv,.pdf,image/*" multiple>
    </div>
    <div class="list" id="dl"></div>`;
@@ -543,17 +544,7 @@ function mdLite(s){
 function renderIA(){
   const on = navigator.onLine, hasKey = !!AI.key();
   let h = `<h2 class="view">Preguntar a la IA</h2>`;
-  if (!hasKey) {
-    h += `<div class="card"><h3>Conecta la IA</h3>
-      <p>La IA necesita tu clave de Claude. Se guarda solo en este teléfono y cada consulta se cobra a tu cuenta de Anthropic.</p>
-      <ol class="steps"><li>Entra a <a href="https://console.anthropic.com/settings/keys" target="_blank" rel="noopener">console.anthropic.com</a> y crea una cuenta.</li><li>Carga saldo y, si quieres, pon un límite de gasto mensual.</li><li>Crea una clave (empieza con <code>sk-ant-</code>) y pégala aquí.</li></ol>
-      <div class="field"><label for="ik">Clave de API</label><input id="ik" type="password" autocomplete="off" placeholder="sk-ant-…"></div>
-      <button class="btn" id="iks">Guardar clave</button>
-      <p class="small muted">Sin clave, el buscador sigue funcionando con la base guardada.</p></div>`;
-    view.innerHTML = h;
-    $("#iks").onclick = () => { const k = $("#ik").value.trim(); if (!/^sk-ant-/.test(k)) { toast("La clave debe empezar con sk-ant-"); return; } AI.setKey(k); toast("Clave guardada"); renderIA(); };
-    return;
-  }
+  if (!hasKey) return renderFree();
   if (!on) h += `<div class="alert"><b>Sin conexión</b><p>La IA necesita internet. Mientras tanto, usa el buscador: responde con la base guardada y tus documentos.</p></div>`;
   h += `<div class="chips">${["Ayúdame a decidir entre dos opciones", "Analiza los riesgos de esta tarea", "¿Cómo bajo el costo por metro de avance?", "Arma un IPERC para desatado en un tajo"].map(s => `<button class="chip" data-s="${esc(s)}">${esc(s)}</button>`).join("")}</div>
     <div id="chat" class="chat"></div>
@@ -663,7 +654,8 @@ async function docBlock(d){
 }
 /* Leer con IA: transcribe y resume para que el documento quede buscable sin conexión */
 async function readWithAI(d, btn){
-  if (!AI.ready()) { toast(AI.key() ? "Necesitas conexión a internet." : "Primero conecta la IA en la pestaña IA."); return; }
+  if (!AI.key()) { toast("Sin clave de API: abre Claude, adjunta este archivo, pide que lo transcriba y pega el texto en Notas."); return; }
+  if (!navigator.onLine) { toast("Necesitas conexión a internet."); return; }
   btn.disabled = true; btn.textContent = "Leyendo con IA…";
   try {
     const client = await AI.getClient();
@@ -686,7 +678,8 @@ async function readWithAI(d, btn){
   } catch(e){ toast(errMsg(e)); btn.disabled = false; btn.textContent = "Leer con IA"; }
 }
 async function askAboutDoc(d){
-  if (!AI.ready()) { toast(AI.key() ? "Necesitas conexión a internet." : "Primero conecta la IA en la pestaña IA."); return; }
+  if (!AI.key()) { sessionSet("fq", `Analiza el documento "${d.titulo}" (te lo adjunto). Resume lo importante, señala riesgos SSOMA o incumplimientos y recomienda acciones.` + (d.texto ? "\n\nTexto del documento:\n" + d.texto.slice(0, 4000) : "")); go({v: "ia"}); toast(d.tipo === "Foto" || !d.texto ? "Al abrir Claude, adjunta también el archivo." : "Pregunta preparada."); return; }
+  if (!navigator.onLine) { toast("Necesitas conexión a internet."); return; }
   try {
     const block = await docBlock(d);
     go({v: "ia"});
@@ -695,6 +688,69 @@ async function askAboutDoc(d){
   } catch(e){ toast(errMsg(e)); }
 }
 
+
+/* ---------- modo gratis: preparar la consulta y abrirla en la app de Claude ---------- */
+const BASE_MD = "https://wilmergc17-arch.github.io/asistente-minero/fuente/base_conocimiento.md";
+function freePrompt(q){
+  const ctx = contextFor(q);
+  return `Actúa como asesor experto en minería subterránea peruana, logística minera, CAPEX/OPEX y sobre todo SSOMA (D.S. 024-2016-EM). Responde en español con terminología peruana, directo y práctico. La seguridad va primero: menciona los controles críticos si la tarea tiene riesgo. Si ayudas a decidir, compara opciones en costo, riesgo, plazo y viabilidad, y da una recomendación clara. No inventes artículos ni cifras.\n\n` +
+    (ctx ? `Información de mi app Asistente Minero relacionada:\n${ctx.slice(0, 9000)}\n\n` : "") + `Mi pregunta: ${q}`;
+}
+async function copyText(s){ try { await navigator.clipboard.writeText(s); return true; } catch(e){ return false; } }
+function renderFree(){
+  let h = `<h2 class="view">Preguntar a la IA</h2>
+   <div class="card"><h3>Gratis con la app de Claude</h3>
+     <p>Escribe tu pregunta. La app le suma las fichas relacionadas de la base, la copia y abre Claude para que la envíes.</p>
+     <div class="chips">${["Ayúdame a decidir entre dos opciones", "Analiza los riesgos de esta tarea", "¿Cómo bajo el costo por metro de avance?", "Arma un IPERC para desatado en un tajo"].map(s => `<button class="chip" data-s="${esc(s)}">${esc(s)}</button>`).join("")}</div>
+     <div class="field"><label for="fq">Tu pregunta</label><textarea id="fq" rows="4" placeholder="Ej.: ¿Conviene comprar un scoop de 4.2 yd³ o seguir con contrata?">${esc(sessionGet("fq"))}</textarea></div>
+     <button class="btn" id="fgo">Preparar y abrir Claude</button>
+     <div id="fout"></div>
+     ${navigator.onLine ? "" : `<p class="conf">Sin conexión: puedes preparar la pregunta, pero Claude necesita internet para responder.</p>`}
+   </div>
+   <div class="card"><h3>Guardar lo que aprendiste</h3>
+     <p>Copia la respuesta de Claude y pégala aquí. Queda en Mis docs y la encuentras sin conexión.</p>
+     <div class="field"><label for="ft">Tema</label><input id="ft" placeholder="Ej.: Comprar scoop vs. contrata"></div>
+     <div class="field"><label for="fa">Respuesta de Claude</label><textarea id="fa" rows="5"></textarea></div>
+     <button class="btn ghost" id="fsave">Guardar en Mis docs</button>
+   </div>
+   <details class="card"><summary><b>Darle toda la base a Claude (una sola vez)</b></summary>
+     <ol class="steps"><li>Abre <a href="${BASE_MD}" target="_blank" rel="noopener">base_conocimiento.md</a> y descárgalo.</li>
+       <li>En Claude crea un <b>Proyecto</b> llamado “Asistente Minero”.</li>
+       <li>En el proyecto, agrega ese archivo como conocimiento.</li>
+       <li>Haz tus preguntas dentro del proyecto: Claude usará siempre la base y la terminología peruana.</li></ol>
+     <p class="small muted">Para fotos o PDF, adjúntalos directo en Claude y pide que los transcriba; luego guarda el texto aquí.</p>
+   </details>
+   <details class="card"><summary><b>Modo directo con clave de API (de pago)</b></summary>
+     <p>Responde dentro de esta app, lee fotos solo y busca en internet. Cada consulta se cobra a tu cuenta de Anthropic.</p>
+     <ol class="steps"><li>Crea una clave en <a href="https://console.anthropic.com/settings/keys" target="_blank" rel="noopener">console.anthropic.com</a> y carga saldo.</li><li>Pégala aquí. Se guarda solo en este teléfono.</li></ol>
+     <div class="field"><label for="ik">Clave de API</label><input id="ik" type="password" autocomplete="off" placeholder="sk-ant-…"></div>
+     <button class="btn ghost" id="iks">Guardar clave</button>
+   </details>`;
+  view.innerHTML = h;
+  view.querySelectorAll(".chip[data-s]").forEach(c => c.onclick = () => { $("#fq").value = c.dataset.s + ": "; $("#fq").focus(); });
+  $("#fq").addEventListener("input", e => sessionSet("fq", e.target.value));
+  $("#fgo").onclick = async () => {
+    const q = $("#fq").value.trim(); if (!q) { toast("Escribe tu pregunta primero."); return; }
+    const prompt = freePrompt(q);
+    const copied = await copyText(prompt);
+    const url = "https://claude.ai/new?q=" + encodeURIComponent(prompt);
+    const href = url.length < 8000 ? url : "https://claude.ai/new";
+    $("#fout").innerHTML = `<div class="result ok"><span>${copied ? "Pregunta copiada con la información de la base." : "No pude copiar automáticamente. Copia el texto de abajo."}</span>
+      <a class="btn" href="${esc(href)}" target="_blank" rel="noopener">Abrir Claude</a>
+      <span class="small">${href === url ? "Claude se abrirá con la pregunta escrita; solo envíala." : "En Claude, mantén presionado el cuadro de texto y elige Pegar."}</span></div>
+      <details class="small"><summary>Ver el texto preparado</summary><textarea rows="8" readonly style="width:100%">${esc(prompt)}</textarea></details>`;
+    try { window.open(href, "_blank", "noopener"); } catch(e){}
+  };
+  $("#fsave").onclick = async () => {
+    const a = $("#fa").value.trim(); if (!a) { toast("Pega primero la respuesta."); return; }
+    const titulo = $("#ft").value.trim() || $("#fq").value.trim().slice(0, 90) || "Respuesta de Claude";
+    try { await DB.put({id: "d" + Date.now(), nombre: "Respuesta de Claude", titulo, fecha: Date.now(), tamano: 0, notas: "", etiquetas: "IA aprendido", texto: a, tipo: "IA", blob: null});
+      await loadDocs(); buildIndex(); $("#fa").value = ""; $("#ft").value = ""; toast("Guardado. Ya lo puedes buscar sin conexión."); } catch(e){ toast("No se pudo guardar en el teléfono."); }
+  };
+  $("#iks").onclick = () => { const k = $("#ik").value.trim(); if (!/^sk-ant-/.test(k)) { toast("La clave debe empezar con sk-ant-"); return; } AI.setKey(k); toast("Clave guardada"); renderIA(); };
+}
+function sessionGet(k){ try { return sessionStorage.getItem(k) || ""; } catch(e){ return ""; } }
+function sessionSet(k, v){ try { sessionStorage.setItem(k, v); } catch(e){} }
 /* ---------- arranque ---------- */
 (async () => {
   await DB.open(); await loadDocs(); buildIndex();
