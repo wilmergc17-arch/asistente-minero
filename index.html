@@ -94,6 +94,8 @@ td:last-child{font-variant-numeric:tabular-nums;white-space:nowrap}
 .back{justify-self:start;border:0;background:none;color:var(--ore);font-weight:600;padding:4px 0;cursor:pointer}
 .chips{display:flex;gap:6px;flex-wrap:wrap}
 .chip{border:1px solid var(--line);background:var(--surface);border-radius:99px;padding:6px 12px;font-size:.85rem;cursor:pointer}
+a.chip{color:var(--ink);text-decoration:none}
+a.btn{text-decoration:none;text-align:center}
 .chip[aria-pressed="true"]{background:var(--rock);color:var(--on-rock);border-color:var(--rock)}
 .field{display:grid;gap:4px}
 .field label{font-size:.85rem;font-weight:600;color:var(--muted)}
@@ -317,7 +319,7 @@ function renderHome(){
     <div class="alert"><b>Antes de empezar la guardia</b><p>Desatado, IPERC continuo y verificación de gases. Ninguna tarea empieza sin estos tres controles.</p></div>
     <h2 class="sec">Consultar</h2>
     <div class="grid">${tiles}
-      <button class="tile" onclick="go({v:'ia'})"><span class="k">Preguntar a la IA</span><span class="n">${AI.key() ? "Clave conectada" : "Gratis con la app de Claude"} · decisiones, fotos, normas</span></button>
+      <button class="tile" onclick="go({v:'ia'})"><span class="k">Preguntar a la IA</span><span class="n">${AI.key() ? "Clave conectada" : "Gratis: Claude, ChatGPT, Gemini y más"} · decisiones, fotos, normas</span></button>
       <button class="tile" onclick="go({v:'calc'})"><span class="k">Calculadoras</span><span class="n">${CALCS.length} herramientas · flota, costos, seguridad</span></button>
       <button class="tile" onclick="go({v:'docs'})"><span class="k">Mis documentos</span><span class="n">${DOCS.length} guardados en este teléfono</span></button>
     </div>
@@ -329,7 +331,7 @@ function renderHome(){
 function renderSearch(q){
   const r = search(q);
   let h = `${backBtn()}<h2 class="view">“${esc(q)}”</h2>`;
-  h += AI.ready() ? `<button class="btn" id="askai">Preguntar a la IA con esta información</button>` : `<button class="btn ghost" id="askfree">Preguntar en Claude (gratis)</button>`;
+  h += AI.ready() ? `<button class="btn" id="askai">Preguntar a la IA con esta información</button>` : `<button class="btn ghost" id="askfree">Preguntar a una IA (gratis)</button>`;
   if (!r.length){
     h += `<div class="card"><p>No encontré nada sobre eso en la base guardada.</p><p class="muted small">Prueba con otra palabra (por ejemplo “gases”, “scoop”, “costo por metro”) o pregúntale a la IA con el botón de arriba.</p></div>`;
   } else {
@@ -696,21 +698,36 @@ function freePrompt(q){
   return `Actúa como asesor experto en minería subterránea peruana, logística minera, CAPEX/OPEX y sobre todo SSOMA (D.S. 024-2016-EM). Responde en español con terminología peruana, directo y práctico. La seguridad va primero: menciona los controles críticos si la tarea tiene riesgo. Si ayudas a decidir, compara opciones en costo, riesgo, plazo y viabilidad, y da una recomendación clara. No inventes artículos ni cifras.\n\n` +
     (ctx ? `Información de mi app Asistente Minero relacionada:\n${ctx.slice(0, 9000)}\n\n` : "") + `Mi pregunta: ${q}`;
 }
+/* IA externas: q = admite la pregunta en el enlace; sin q se abre y el usuario pega */
+const IAS = [
+  {id: "claude", name: "Claude", home: "https://claude.ai/new", q: "https://claude.ai/new?q="},
+  {id: "chatgpt", name: "ChatGPT", home: "https://chatgpt.com/", q: "https://chatgpt.com/?q="},
+  {id: "gemini", name: "Gemini", home: "https://gemini.google.com/app"},
+  {id: "copilot", name: "Copilot", home: "https://copilot.microsoft.com/", q: "https://copilot.microsoft.com/?q="},
+  {id: "perplexity", name: "Perplexity", home: "https://www.perplexity.ai/", q: "https://www.perplexity.ai/search?q="},
+  {id: "deepseek", name: "DeepSeek", home: "https://chat.deepseek.com/"},
+];
+const iaById = id => IAS.find(a => a.id === id) || IAS[0];
+function iaPick(){ try { return localStorage.getItem("ia-ext") || "claude"; } catch(e){ return "claude"; } }
+function iaSet(id){ try { localStorage.setItem("ia-ext", id); } catch(e){} }
+function iaHref(a, prompt){ if (!a.q) return a.home; const u = a.q + encodeURIComponent(prompt); return u.length < 8000 ? u : a.home; }
 async function copyText(s){ try { await navigator.clipboard.writeText(s); return true; } catch(e){ return false; } }
 function renderFree(){
   let h = `<h2 class="view">Preguntar a la IA</h2>
-   <div class="card"><h3>Gratis con la app de Claude</h3>
-     <p>Escribe tu pregunta. La app le suma las fichas relacionadas de la base, la copia y abre Claude para que la envíes.</p>
+   <div class="card"><h3>Gratis con la IA que prefieras</h3>
+     <p>Escribe tu pregunta. La app le suma las fichas relacionadas de la base, la copia y abre la IA que elijas para que la envíes.</p>
      <div class="chips">${["Ayúdame a decidir entre dos opciones", "Analiza los riesgos de esta tarea", "¿Cómo bajo el costo por metro de avance?", "Arma un IPERC para desatado en un tajo"].map(s => `<button class="chip" data-s="${esc(s)}">${esc(s)}</button>`).join("")}</div>
      <div class="field"><label for="fq">Tu pregunta</label><textarea id="fq" rows="4" placeholder="Ej.: ¿Conviene comprar un scoop de 4.2 yd³ o seguir con contrata?">${esc(sessionGet("fq"))}</textarea></div>
-     <button class="btn" id="fgo">Preparar y abrir Claude</button>
+     <div class="field"><label>Enviar a</label><div class="chips" id="fia">${IAS.map(a => `<button class="chip" aria-pressed="${a.id === iaPick()}" data-ia="${a.id}">${esc(a.name)}</button>`).join("")}</div></div>
+     <button class="btn" id="fgo">Preparar y abrir ${esc(iaById(iaPick()).name)}</button>
      <div id="fout"></div>
      ${navigator.onLine ? "" : `<p class="conf">Sin conexión: puedes preparar la pregunta, pero Claude necesita internet para responder.</p>`}
    </div>
    <div class="card"><h3>Guardar lo que aprendiste</h3>
-     <p>Copia la respuesta de Claude y pégala aquí. Queda en Mis docs y la encuentras sin conexión.</p>
-     <div class="field"><label for="ft">Tema</label><input id="ft" placeholder="Ej.: Comprar scoop vs. contrata"></div>
-     <div class="field"><label for="fa">Respuesta de Claude</label><textarea id="fa" rows="5"></textarea></div>
+     <p>Copia la respuesta de la IA y pégala aquí. Queda en Mis docs y la encuentras sin conexión.</p>
+     <div class="fields"><div class="field"><label for="ft">Tema</label><input id="ft" placeholder="Ej.: Comprar scoop vs. contrata"></div>
+     <div class="field"><label for="fwho">IA que respondió</label><select id="fwho">${IAS.map(a => `<option ${a.id === iaPick() ? "selected" : ""}>${esc(a.name)}</option>`).join("")}<option>Otra</option></select></div></div>
+     <div class="field"><label for="fa">Respuesta</label><textarea id="fa" rows="5"></textarea></div>
      <button class="btn ghost" id="fsave">Guardar en Mis docs</button>
    </div>
    <details class="card"><summary><b>Darle toda la base a Claude (una sola vez)</b></summary>
@@ -729,22 +746,24 @@ function renderFree(){
   view.innerHTML = h;
   view.querySelectorAll(".chip[data-s]").forEach(c => c.onclick = () => { $("#fq").value = c.dataset.s + ": "; $("#fq").focus(); });
   $("#fq").addEventListener("input", e => sessionSet("fq", e.target.value));
+  view.querySelectorAll("#fia .chip").forEach(c => c.onclick = () => { iaSet(c.dataset.ia); view.querySelectorAll("#fia .chip").forEach(z => z.setAttribute("aria-pressed", z === c)); $("#fgo").textContent = "Preparar y abrir " + iaById(c.dataset.ia).name; });
   $("#fgo").onclick = async () => {
     const q = $("#fq").value.trim(); if (!q) { toast("Escribe tu pregunta primero."); return; }
-    const prompt = freePrompt(q);
+    const prompt = freePrompt(q), ia = iaById(iaPick());
     const copied = await copyText(prompt);
-    const url = "https://claude.ai/new?q=" + encodeURIComponent(prompt);
-    const href = url.length < 8000 ? url : "https://claude.ai/new";
+    const href = iaHref(ia, prompt), pre = href !== ia.home;
     $("#fout").innerHTML = `<div class="result ok"><span>${copied ? "Pregunta copiada con la información de la base." : "No pude copiar automáticamente. Copia el texto de abajo."}</span>
-      <a class="btn" href="${esc(href)}" target="_blank" rel="noopener">Abrir Claude</a>
-      <span class="small">${href === url ? "Claude se abrirá con la pregunta escrita; solo envíala." : "En Claude, mantén presionado el cuadro de texto y elige Pegar."}</span></div>
+      <a class="btn" href="${esc(href)}" target="_blank" rel="noopener">Abrir ${esc(ia.name)}</a>
+      <span class="small">${pre ? ia.name + " se abrirá con la pregunta escrita; solo envíala." : "En " + ia.name + ", mantén presionado el cuadro de texto y elige Pegar."}</span>
+      <span class="small"><b>Comparar:</b> envía la misma pregunta a otra IA:</span>
+      <div class="chips">${IAS.filter(a => a.id !== ia.id).map(a => `<a class="chip" href="${esc(iaHref(a, prompt))}" target="_blank" rel="noopener">${esc(a.name)}</a>`).join("")}</div></div>
       <details class="small"><summary>Ver el texto preparado</summary><textarea rows="8" readonly style="width:100%">${esc(prompt)}</textarea></details>`;
     try { window.open(href, "_blank", "noopener"); } catch(e){}
   };
   $("#fsave").onclick = async () => {
     const a = $("#fa").value.trim(); if (!a) { toast("Pega primero la respuesta."); return; }
-    const titulo = $("#ft").value.trim() || $("#fq").value.trim().slice(0, 90) || "Respuesta de Claude";
-    try { await DB.put({id: "d" + Date.now(), nombre: "Respuesta de Claude", titulo, fecha: Date.now(), tamano: 0, notas: "", etiquetas: "IA aprendido", texto: a, tipo: "IA", blob: null});
+    const who = $("#fwho").value, titulo = $("#ft").value.trim() || $("#fq").value.trim().slice(0, 90) || "Respuesta de " + who;
+    try { await DB.put({id: "d" + Date.now(), nombre: "Respuesta de " + who, titulo, fecha: Date.now(), tamano: 0, notas: "Respondió: " + who, etiquetas: "IA aprendido, " + who, texto: a, tipo: "IA", blob: null});
       await loadDocs(); buildIndex(); $("#fa").value = ""; $("#ft").value = ""; toast("Guardado. Ya lo puedes buscar sin conexión."); } catch(e){ toast("No se pudo guardar en el teléfono."); }
   };
   $("#iks").onclick = () => { const k = $("#ik").value.trim(); if (!/^sk-ant-/.test(k)) { toast("La clave debe empezar con sk-ant-"); return; } AI.setKey(k); toast("Clave guardada"); renderIA(); };

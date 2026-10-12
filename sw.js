@@ -1,4 +1,4 @@
-const CACHE = "asistente-minero-0.2.0-8960808b";
+const CACHE = "asistente-minero-0.2.0-ce580ca2";
 const SHELL = ["./", "index.html", "manifest.webmanifest", "icon-192.png", "icon-512.png"];
 const EXTRA = [
   "https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap",
