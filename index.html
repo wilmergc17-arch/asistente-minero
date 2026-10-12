@@ -319,7 +319,7 @@ function renderHome(){
     <div class="alert"><b>Antes de empezar la guardia</b><p>Desatado, IPERC continuo y verificación de gases. Ninguna tarea empieza sin estos tres controles.</p></div>
     <h2 class="sec">Consultar</h2>
     <div class="grid">${tiles}
-      <button class="tile" onclick="go({v:'ia'})"><span class="k">Preguntar a la IA</span><span class="n">${AI.key() ? "Clave conectada" : "Gratis: Claude, ChatGPT, Gemini y más"} · decisiones, fotos, normas</span></button>
+      <button class="tile" onclick="go({v:'ia'})"><span class="k">Preguntar a la IA</span><span class="n">${AI.key() ? PROVS[AI.prov()].name : "Gratis con Gemini"} · decisiones, fotos, normas</span></button>
       <button class="tile" onclick="go({v:'calc'})"><span class="k">Calculadoras</span><span class="n">${CALCS.length} herramientas · flota, costos, seguridad</span></button>
       <button class="tile" onclick="go({v:'docs'})"><span class="k">Mis documentos</span><span class="n">${DOCS.length} guardados en este teléfono</span></button>
     </div>
@@ -331,7 +331,7 @@ function renderHome(){
 function renderSearch(q){
   const r = search(q);
   let h = `${backBtn()}<h2 class="view">“${esc(q)}”</h2>`;
-  h += AI.ready() ? `<button class="btn" id="askai">Preguntar a la IA con esta información</button>` : `<button class="btn ghost" id="askfree">Preguntar a una IA (gratis)</button>`;
+  h += AI.ready() ? `<button class="btn" id="askai">Preguntar a la IA con esta información</button>` : `<button class="btn ghost" id="askfree">Preguntar a la IA (gratis)</button>`;
   if (!r.length){
     h += `<div class="card"><p>No encontré nada sobre eso en la base guardada.</p><p class="muted small">Prueba con otra palabra (por ejemplo “gases”, “scoop”, “costo por metro”) o pregúntale a la IA con el botón de arriba.</p></div>`;
   } else {
@@ -503,9 +503,12 @@ Cómo respondes:
 - Para ayudar a decidir: plantea las opciones, compáralas en costo, riesgo SSOMA, plazo y viabilidad, da una recomendación clara y di qué dato cambiaría la recomendación.
 - Si te falta un dato de la operación, asume un valor razonable, dilo explícitamente y sigue.`;
 
+const PROVS = {gemini: {name: "Gemini (gratis)", store: "ia-key-gemini"}, claude: {name: "Claude (de pago)", store: "ia-key"}};
 const AI = {
-  key(){ try { return localStorage.getItem("ia-key") || ""; } catch(e){ return ""; } },
-  setKey(k){ try { k ? localStorage.setItem("ia-key", k) : localStorage.removeItem("ia-key"); } catch(e){} this.client = null; },
+  prov(){ try { const p = localStorage.getItem("ia-prov"); if (PROVS[p]) return p; return localStorage.getItem("ia-key") ? "claude" : "gemini"; } catch(e){ return "gemini"; } },
+  setProv(p){ try { localStorage.setItem("ia-prov", p); } catch(e){} CHAT.messages = []; CHAT.gm = []; },
+  key(){ try { return localStorage.getItem(PROVS[this.prov()].store) || ""; } catch(e){ return ""; } },
+  setKey(k){ try { const s = PROVS[this.prov()].store; k ? localStorage.setItem(s, k) : localStorage.removeItem(s); } catch(e){} this.client = null; },
   web(){ try { return localStorage.getItem("ia-web") !== "0"; } catch(e){ return true; } },
   client: null,
   async getClient(){
@@ -520,7 +523,7 @@ const AI = {
 };
 /* messages: historial completo que se envía a la API (solo en memoria, nunca se edita).
    view: lo que se muestra; se guarda en el teléfono para releerlo, sin adjuntos. */
-let CHAT = {messages: [], view: [], busy: false};
+let CHAT = {messages: [], gm: [], view: [], busy: false};
 try { const s = JSON.parse(localStorage.getItem("ia-chat") || "null"); if (s && Array.isArray(s.view)) CHAT.view = s.view.map(m => ({...m, done: true, status: ""})); } catch(e){}
 function saveChat(){ try { localStorage.setItem("ia-chat", JSON.stringify({view: CHAT.view.slice(-40)})); } catch(e){} }
 
@@ -545,21 +548,22 @@ function mdLite(s){
 
 function renderIA(){
   const on = navigator.onLine, hasKey = !!AI.key();
-  let h = `<h2 class="view">Preguntar a la IA</h2>`;
-  if (!hasKey) return renderFree();
+  if (!hasKey || IA_SETUP) return renderSetup();
+  let h = `<h2 class="view">Preguntar a la IA</h2><p class="small muted">Responde: <b>${esc(PROVS[AI.prov()].name)}</b>. Usa la base de la app y tus documentos.</p>`;
   if (!on) h += `<div class="alert"><b>Sin conexión</b><p>La IA necesita internet. Mientras tanto, usa el buscador: responde con la base guardada y tus documentos.</p></div>`;
   h += `<div class="chips">${["Ayúdame a decidir entre dos opciones", "Analiza los riesgos de esta tarea", "¿Cómo bajo el costo por metro de avance?", "Arma un IPERC para desatado en un tajo"].map(s => `<button class="chip" data-s="${esc(s)}">${esc(s)}</button>`).join("")}</div>
     <div id="chat" class="chat"></div>
     <form id="askf" class="ask"><textarea id="ask" rows="3" placeholder="Escribe tu pregunta o describe la decisión que debes tomar" ${on ? "" : "disabled"}></textarea>
       <div class="chips"><button class="btn" id="askb" type="submit" ${on ? "" : "disabled"}>Preguntar</button>
-      <label class="small"><input type="checkbox" id="iw" ${AI.web() ? "checked" : ""}> Buscar también en internet</label></div></form>
+      ${AI.prov() === "claude" ? `<label class="small"><input type="checkbox" id="iw" ${AI.web() ? "checked" : ""}> Buscar también en internet</label>` : ""}</div></form>
     <details class="small"><summary>Ajustes de la IA</summary><div class="chips" style="margin-top:8px">
-      <button class="btn ghost" id="newc">Nueva conversación</button><button class="btn danger" id="delk">Quitar clave</button></div></details>`;
+      <button class="btn ghost" id="newc">Nueva conversación</button><button class="btn ghost" id="chg">Cambiar de IA</button><button class="btn danger" id="delk">Quitar clave</button></div></details>`;
   view.innerHTML = h;
   drawChat();
   view.querySelectorAll(".chip[data-s]").forEach(c => c.onclick = () => { $("#ask").value = c.dataset.s + ": "; $("#ask").focus(); });
-  $("#iw").onchange = e => { try { localStorage.setItem("ia-web", e.target.checked ? "1" : "0"); } catch(_){} };
-  $("#newc").onclick = () => { CHAT = {messages: [], view: [], busy: false}; saveChat(); drawChat(); };
+  $("#chg").onclick = () => { IA_SETUP = true; renderIA(); };
+  if ($("#iw")) $("#iw").onchange = e => { try { localStorage.setItem("ia-web", e.target.checked ? "1" : "0"); } catch(_){} };
+  $("#newc").onclick = () => { CHAT = {messages: [], gm: [], view: [], busy: false}; saveChat(); drawChat(); };
   $("#delk").onclick = () => { AI.setKey(""); toast("Clave eliminada de este teléfono"); renderIA(); };
   $("#askf").onsubmit = e => { e.preventDefault(); const q = $("#ask").value.trim(); if (q && !CHAT.busy) { $("#ask").value = ""; ask(q); } };
 }
@@ -581,6 +585,11 @@ async function saveAnswer(i){
 }
 function errMsg(e){
   const s = e && (e.status || (e.error && e.error.status));
+  if (e && e.gemini){
+    if (/API key|API_KEY/i.test(e.message) || s === 401 || s === 403) return "La clave de Gemini no es válida. Revísala en Ajustes de la IA.";
+    if (s === 429) return "Llegaste al límite gratuito de Gemini por ahora. Espera unos minutos (o hasta mañana si es el límite diario).";
+    if (s === 400 && /location|region|country/i.test(e.message)) return "Gemini no está disponible en tu región con esta clave.";
+  }
   if (s === 401) return "La clave no es válida. Revísala en Ajustes de la IA.";
   if (s === 403) return "Tu cuenta no tiene permiso para este modelo o función.";
   if (s === 429) return "Demasiadas consultas seguidas o límite de gasto alcanzado. Espera un momento.";
@@ -589,8 +598,75 @@ function errMsg(e){
   if (!navigator.onLine) return "Se perdió la conexión. Vuelve a intentar cuando tengas señal.";
   return "No se pudo completar la consulta: " + (e && e.message ? e.message : "error desconocido") + ".";
 }
+/* ---------- Gemini (plan gratuito de Google AI Studio) ---------- */
+const GEMINI_MODELS = ["gemini-3.8-flash", "gemini-3.5-flash-lite"];
+function toGemini(block){
+  if (block.type === "text") return {text: block.text};
+  return {inline_data: {mime_type: block.source.media_type, data: block.source.data}};
+}
+async function geminiStream({system, contents, onText}){
+  let lastErr;
+  for (const model of GEMINI_MODELS){
+    let r;
+    try {
+      r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:streamGenerateContent?alt=sse`, {
+        method: "POST", headers: {"content-type": "application/json", "x-goog-api-key": AI.key()},
+        body: JSON.stringify({system_instruction: {parts: [{text: system}]}, contents, generationConfig: {maxOutputTokens: 8192}})});
+    } catch(e){ throw Object.assign(new Error("sin conexión con Gemini"), {status: 0}); }
+    if (!r.ok){
+      let msg = ""; try { const j = await r.json(); msg = (j.error && j.error.message) || ""; } catch(_){}
+      const err = Object.assign(new Error(msg || "HTTP " + r.status), {status: r.status, gemini: true});
+      if (r.status === 404 || r.status === 429 || r.status >= 500){ lastErr = err; continue; }
+      throw err;
+    }
+    const reader = r.body.getReader(), dec = new TextDecoder();
+    let buf = "", text = "", finish = "";
+    for (;;){
+      const {value, done} = await reader.read(); if (done) break;
+      buf += dec.decode(value, {stream: true});
+      let i;
+      while ((i = buf.indexOf("\n\n")) !== -1 || (i = buf.indexOf("\r\n\r\n")) !== -1){
+        const chunk = buf.slice(0, i); buf = buf.slice(i + (buf[i] === "\r" ? 4 : 2));
+        for (const line of chunk.split(/\r?\n/)){
+          if (!line.startsWith("data:")) continue;
+          let j; try { j = JSON.parse(line.slice(5).trim()); } catch(_){ continue; }
+          if (j.promptFeedback && j.promptFeedback.blockReason) finish = "BLOCKED";
+          const c = j.candidates && j.candidates[0];
+          if (c){ (c.content && c.content.parts || []).forEach(pt => { if (pt.text && !pt.thought){ text += pt.text; onText && onText(pt.text); } }); if (c.finishReason) finish = c.finishReason; }
+        }
+      }
+    }
+    return {text, finish, model};
+  }
+  throw lastErr;
+}
+async function askGemini(q, attach, out){
+  const ctx = contextFor(q);
+  const parts = [];
+  if (attach) parts.push(toGemini(attach.block));
+  parts.push({text: (ctx ? `Información de la app relacionada con la pregunta:\n${ctx}\n\n` : "") + `Pregunta: ${q}`});
+  const base = CHAT.gm.length;
+  CHAT.gm.push({role: "user", parts});
+  try {
+    const r = await geminiStream({system: SYSTEM, contents: CHAT.gm, onText: t => { out.text += t; out.status = ""; drawChatThrottled(); }});
+    if (!r.text){ CHAT.gm.length = base; out.text = r.finish === "SAFETY" || r.finish === "BLOCKED" ? "Gemini no quiso responder esta consulta. Reformúlala con más contexto operativo." : "Gemini no devolvió respuesta. Intenta de nuevo."; out.err = true; return; }
+    CHAT.gm.push({role: "model", parts: [{text: r.text}]});
+    if (r.finish === "MAX_TOKENS") out.text += "\n\n(La respuesta se cortó por largo. Pide que continúe.)";
+  } catch(e){ CHAT.gm.length = base; out.text = errMsg(e); out.err = true; }
+}
 async function ask(q, attach){
   CHAT.busy = true;
+  if (AI.prov() === "gemini"){
+    if (!CHAT.gm.length && CHAT.view.length && CHAT.view[CHAT.view.length - 1].role !== "note") CHAT.view.push({role: "note", text: "Nueva conversación: la IA no recuerda las respuestas anteriores a esta línea."});
+    CHAT.view.push({role: "user", text: q, att: attach ? attach.label : ""});
+    const out = {role: "assistant", text: "", status: "Pensando…", sources: [], done: false};
+    CHAT.view.push(out); drawChat(); scrollChat();
+    const btn = $("#askb"); if (btn) btn.disabled = true;
+    await askGemini(q, attach, out);
+    out.done = true; out.status = ""; CHAT.busy = false; saveChat(); drawChat(); scrollChat();
+    if (btn) btn.disabled = false;
+    return;
+  }
   const ctx = contextFor(q);
   const content = [];
   if (attach) content.push(attach.block);
@@ -655,22 +731,30 @@ async function docBlock(d){
   return {type: "text", text: `<documento titulo="${d.titulo}">\n${(d.texto || "").slice(0, 150000)}\n</documento>`};
 }
 /* Leer con IA: transcribe y resume para que el documento quede buscable sin conexión */
+const READ_SYS = "Extraes información de documentos y fotos de minería subterránea peruana. Respondes solo en el formato pedido, en español.";
+const READ_TXT = "Lee este documento o foto. Devuelve exactamente tres secciones con estos encabezados:\nRESUMEN: 2 a 4 frases sobre qué es y para qué sirve, destacando cualquier riesgo o control de seguridad.\nETIQUETAS: 3 a 8 palabras clave separadas por comas, con términos de minería peruana.\nTEXTO: la transcripción fiel de todo el texto legible. Si es una foto sin texto, describe lo que se ve con detalle técnico (equipos, condiciones subestándar, señalización).";
+async function readText(block){
+  if (AI.prov() === "gemini"){
+    const r = await geminiStream({system: READ_SYS, contents: [{role: "user", parts: [toGemini(block), {text: READ_TXT}]}]});
+    if (!r.text) throw new Error("la IA no pudo procesar este archivo");
+    return r.text;
+  }
+  const client = await AI.getClient();
+  const msg = await client.beta.messages.stream({
+      model: MODEL, max_tokens: 16000, thinking: {type: "adaptive"}, output_config: {effort: "low"},
+      betas: ["server-side-fallback-2026-07-01"], fallbacks: "default",
+      system: READ_SYS,
+      messages: [{role: "user", content: [block, {type: "text", text: READ_TXT}]}],
+  }).finalMessage();
+  if (msg.stop_reason === "refusal") throw new Error("la IA no pudo procesar este archivo");
+  return msg.content.filter(b => b.type === "text").map(b => b.text).join("\n");
+}
 async function readWithAI(d, btn){
-  if (!AI.key()) { toast("Sin clave de API: abre Claude, adjunta este archivo, pide que lo transcriba y pega el texto en Notas."); return; }
+  if (!AI.key()) { toast("Primero conecta la IA gratuita en la pestaña IA."); go({v: "ia"}); return; }
   if (!navigator.onLine) { toast("Necesitas conexión a internet."); return; }
   btn.disabled = true; btn.textContent = "Leyendo con IA…";
   try {
-    const client = await AI.getClient();
-    const block = await docBlock(d);
-    const msg = await client.beta.messages.stream({
-      model: MODEL, max_tokens: 16000, thinking: {type: "adaptive"}, output_config: {effort: "low"},
-      betas: ["server-side-fallback-2026-07-01"], fallbacks: "default",
-      system: "Extraes información de documentos y fotos de minería subterránea peruana. Respondes solo en el formato pedido, en español.",
-      messages: [{role: "user", content: [block, {type: "text", text:
-        "Lee este documento o foto. Devuelve exactamente tres secciones con estos encabezados:\nRESUMEN: 2 a 4 frases sobre qué es y para qué sirve, destacando cualquier riesgo o control de seguridad.\nETIQUETAS: 3 a 8 palabras clave separadas por comas, con términos de minería peruana.\nTEXTO: la transcripción fiel de todo el texto legible. Si es una foto sin texto, describe lo que se ve con detalle técnico (equipos, condiciones subestándar, señalización)."}]}],
-    }).finalMessage();
-    if (msg.stop_reason === "refusal") throw new Error("la IA no pudo procesar este archivo");
-    const t = msg.content.filter(b => b.type === "text").map(b => b.text).join("\n");
+    const t = await readText(await docBlock(d));
     const part = k => { const m = t.match(new RegExp(k + ":\\s*([\\s\\S]*?)(?=\\n(?:RESUMEN|ETIQUETAS|TEXTO):|$)")); return m ? m[1].trim() : ""; };
     const res = part("RESUMEN"), tags = part("ETIQUETAS"), txt = part("TEXTO") || t;
     if (res) d.notas = (d.notas ? d.notas + "\n\n" : "") + "Resumen IA: " + res;
@@ -680,7 +764,7 @@ async function readWithAI(d, btn){
   } catch(e){ toast(errMsg(e)); btn.disabled = false; btn.textContent = "Leer con IA"; }
 }
 async function askAboutDoc(d){
-  if (!AI.key()) { sessionSet("fq", `Analiza el documento "${d.titulo}" (te lo adjunto). Resume lo importante, señala riesgos SSOMA o incumplimientos y recomienda acciones.` + (d.texto ? "\n\nTexto del documento:\n" + d.texto.slice(0, 4000) : "")); go({v: "ia"}); toast(d.tipo === "Foto" || !d.texto ? "Al abrir Claude, adjunta también el archivo." : "Pregunta preparada."); return; }
+  if (!AI.key()) { toast("Primero conecta la IA gratuita en la pestaña IA."); go({v: "ia"}); return; }
   if (!navigator.onLine) { toast("Necesitas conexión a internet."); return; }
   try {
     const block = await docBlock(d);
@@ -691,6 +775,41 @@ async function askAboutDoc(d){
 }
 
 
+
+let IA_SETUP = false;
+function renderSetup(){
+  const has = p => { try { return !!localStorage.getItem(PROVS[p].store); } catch(e){ return false; } };
+  view.innerHTML = `<h2 class="view">Conectar la IA</h2>
+   <p class="lede">La IA responde aquí mismo, dentro de la app. Solo necesitas conectarla una vez.</p>
+   <div class="card"><h3>Gemini de Google · gratis</h3>
+     <p>Recomendado. No pide tarjeta: solo tu cuenta de Google.</p>
+     <ol class="steps"><li>Abre <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">aistudio.google.com/apikey</a> e ingresa con tu cuenta de Google.</li>
+       <li>Toca <b>Crear clave de API</b> (Create API key) y cópiala.</li>
+       <li>Vuelve aquí y pégala.</li></ol>
+     <div class="field"><label for="gk">Clave de Gemini</label><input id="gk" type="password" autocomplete="off" placeholder="${has("gemini") ? "Ya guardada · pega otra para cambiarla" : "AIza…"}"></div>
+     <div class="chips"><button class="btn" id="gks">${has("gemini") ? "Usar Gemini" : "Guardar y usar Gemini"}</button></div>
+     <p class="small muted">En el plan gratis hay un límite de consultas por día y Google puede usar lo que preguntas para mejorar sus productos. No pongas datos confidenciales de la empresa.</p>
+   </div>
+   <details class="card"><summary><b>Claude de Anthropic · de pago</b></summary>
+     <p>Responde con más profundidad y puede buscar en internet. Cada consulta se cobra a tu cuenta.</p>
+     <ol class="steps"><li>Crea una clave en <a href="https://console.anthropic.com/settings/keys" target="_blank" rel="noopener">console.anthropic.com</a> y carga saldo.</li><li>Pégala aquí. Se guarda solo en este teléfono.</li></ol>
+     <div class="field"><label for="ik">Clave de Claude</label><input id="ik" type="password" autocomplete="off" placeholder="${has("claude") ? "Ya guardada · pega otra para cambiarla" : "sk-ant-…"}"></div>
+     <button class="btn ghost" id="iks">${has("claude") ? "Usar Claude" : "Guardar y usar Claude"}</button>
+   </details>
+   <details class="card"><summary><b>Sin clave: abrir la pregunta en otra app</b></summary>
+     <p>Si no quieres crear una clave, la app prepara la pregunta con la base y la abre en Claude, ChatGPT, Gemini u otra IA.</p>
+     <button class="btn ghost" id="ext">Usar sin clave</button>
+   </details>`;
+  const use = (p, inputId, test, msg) => () => {
+    const k = $(inputId).value.trim();
+    if (!k && !has(p)) { toast("Pega la clave primero."); return; }
+    if (k && !test(k)) { toast(msg); return; }
+    AI.setProv(p); if (k) AI.setKey(k); IA_SETUP = false; toast(PROVS[p].name + " conectada"); renderIA();
+  };
+  $("#gks").onclick = use("gemini", "#gk", k => k.length > 20 && !/\s/.test(k), "Esa clave no parece de Gemini. Cópiala completa desde AI Studio.");
+  $("#iks").onclick = use("claude", "#ik", k => /^sk-ant-/.test(k), "La clave de Claude debe empezar con sk-ant-");
+  $("#ext").onclick = () => renderFree();
+}
 /* ---------- modo gratis: preparar la consulta y abrirla en la app de Claude ---------- */
 const BASE_MD = "https://wilmergc17-arch.github.io/asistente-minero/fuente/base_conocimiento.md";
 function freePrompt(q){
